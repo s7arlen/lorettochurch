@@ -12,7 +12,7 @@ import './HeroSlider.css';
 const slides = [
   {
     id: 1,
-    image: '/images/hero-exterior.jpg',
+    image: `${import.meta.env.BASE_URL}images/hero-exterior.jpg`,
     label: 'Welcome to Our Parish',
     title: 'Our Lady of Loretto Church',
     subtitle: 'A community united in faith, hope and love.',
@@ -20,7 +20,7 @@ const slides = [
   },
   {
     id: 2,
-    image: '/images/hero-interior.jpg',
+    image: `${import.meta.env.BASE_URL}images/hero-interior.jpg`,
     label: 'A Place of Prayer',
     title: 'A Community of Faith',
     subtitle: 'Growing together in Christ, rooted in tradition.',
@@ -28,7 +28,7 @@ const slides = [
   },
   {
     id: 3,
-    image: '/images/hero-marian.jpg',
+    image: `${import.meta.env.BASE_URL}images/hero-marian.jpg`,
     label: 'Our Patroness',
     title: 'Our Lady of Loretto',
     subtitle: 'Guide us and pray for us, O gracious Mother.',
@@ -36,7 +36,7 @@ const slides = [
   },
   {
     id: 4,
-    image: '/images/hero-community.jpg',
+    image: `${import.meta.env.BASE_URL}images/hero-community.jpg`,
     label: 'One Parish, One Family',
     title: 'Faith • Fellowship • Service',
     subtitle: 'Together we celebrate, serve and grow.',

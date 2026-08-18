@@ -11,7 +11,7 @@ export const events = [
     location: 'Our Lady of Loretto Church, Loretto',
     category: 'Feast',
     description: 'Annual parish feast day celebration in honour of Our Lady of Loretto. Holy Mass, procession and parish gathering.',
-    image: '/images/hero-community.jpg',
+    image: `${import.meta.env.BASE_URL}images/hero-community.jpg`,
     featured: true,
   },
   {
@@ -25,7 +25,7 @@ export const events = [
     location: 'Parish Hall',
     category: 'Catechism',
     description: 'Annual catechism examinations for all grades. Students are requested to report 30 minutes before the scheduled time.',
-    image: '/images/quick-events.jpg',
+    image: `${import.meta.env.BASE_URL}images/quick-events.jpg`,
     featured: false,
   },
   {
@@ -39,7 +39,7 @@ export const events = [
     location: 'Parish Hall',
     category: 'Youth',
     description: 'Monthly gathering of the parish youth group. All youth aged 16–35 are welcome.',
-    image: '/images/quick-groups.jpg',
+    image: `${import.meta.env.BASE_URL}images/quick-groups.jpg`,
     featured: false,
   },
   {
@@ -53,7 +53,7 @@ export const events = [
     location: 'Parish Hall',
     category: 'Organization',
     description: "Monthly meeting of the Parish Women's Association. All women of the parish are invited to attend.",
-    image: '/images/hero-community.jpg',
+    image: `${import.meta.env.BASE_URL}images/hero-community.jpg`,
     featured: false,
   },
   {
@@ -67,7 +67,7 @@ export const events = [
     location: 'Our Lady of Loretto Church',
     category: 'Liturgy',
     description: 'Monthly First Friday Mass followed by Adoration of the Blessed Sacrament. All parishioners are encouraged to attend.',
-    image: '/images/quick-mass.jpg',
+    image: `${import.meta.env.BASE_URL}images/quick-mass.jpg`,
     featured: false,
   },
   {
@@ -81,7 +81,7 @@ export const events = [
     location: 'Parish Office',
     category: 'Parish',
     description: 'Monthly Parish Council meeting. All council members are requested to attend. Agenda will be circulated in advance.',
-    image: '/images/hero-exterior.jpg',
+    image: `${import.meta.env.BASE_URL}images/hero-exterior.jpg`,
     featured: false,
   },
 ];

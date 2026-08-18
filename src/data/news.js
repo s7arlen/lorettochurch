@@ -9,7 +9,7 @@ export const news = [
     category: 'Feast',
     excerpt: 'Preparations for the annual Parish Feast of Our Lady of Loretto are well underway. The feast committee has been meeting regularly to plan the celebrations.',
     content: 'Full article content here...',
-    image: '/images/hero-community.jpg',
+    image: `${import.meta.env.BASE_URL}images/hero-community.jpg`,
     featured: true,
   },
   {
@@ -21,7 +21,7 @@ export const news = [
     category: 'Catechism',
     excerpt: 'The new catechism year has begun with enthusiastic participation from children across the parish. Registration is still open for a few more days.',
     content: 'Full article content here...',
-    image: '/images/quick-groups.jpg',
+    image: `${import.meta.env.BASE_URL}images/quick-groups.jpg`,
     featured: false,
   },
   {
@@ -33,7 +33,7 @@ export const news = [
     category: 'Youth',
     excerpt: 'The Parish Youth Group successfully organised a blood donation camp in collaboration with a local hospital. Over 80 units of blood were collected.',
     content: 'Full article content here...',
-    image: '/images/quick-groups.jpg',
+    image: `${import.meta.env.BASE_URL}images/quick-groups.jpg`,
     featured: false,
   },
   {
@@ -45,7 +45,7 @@ export const news = [
     category: 'Newsletter',
     excerpt: 'The August 2026 edition of the Parish Newsletter is now available. Read about upcoming events, parish news and community updates.',
     content: 'Full article content here...',
-    image: '/images/newsletter-cover.jpg',
+    image: `${import.meta.env.BASE_URL}images/newsletter-cover.jpg`,
     featured: false,
   },
   {
@@ -57,7 +57,7 @@ export const news = [
     category: 'Organization',
     excerpt: "The Parish Women's Association celebrated the Feast of Our Lady with a special prayer service and cultural programme.",
     content: 'Full article content here...',
-    image: '/images/hero-community.jpg',
+    image: `${import.meta.env.BASE_URL}images/hero-community.jpg`,
     featured: false,
   },
   {
@@ -69,7 +69,7 @@ export const news = [
     category: 'Parish',
     excerpt: 'The renovation work on the church facade has been successfully completed. We thank all parishioners who contributed generously to this project.',
     content: 'Full article content here...',
-    image: '/images/hero-exterior.jpg',
+    image: `${import.meta.env.BASE_URL}images/hero-exterior.jpg`,
     featured: false,
   },
 ];

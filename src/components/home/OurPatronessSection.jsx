@@ -62,7 +62,7 @@ const OurPatronessSection = () => {
               <div className="patroness__gold-frame-corner bottom-right" />
             </div>
             <img
-              src="/images/patroness-mary.jpg"
+              src={`${import.meta.env.BASE_URL}images/patroness-mary.jpg`}
               alt="Our Lady of Loretto Statue and Marian Devotion"
               className="patroness__image"
             />

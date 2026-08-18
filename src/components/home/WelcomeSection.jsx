@@ -18,7 +18,7 @@ const WelcomeSection = () => {
           >
             <div
               className="welcome__image"
-              style={{ backgroundImage: `url('/images/welcome-church.jpg')` }}
+              style={{ backgroundImage: `url('${import.meta.env.BASE_URL}images/welcome-church.jpg')` }}
               role="img"
               aria-label="Our Lady of Loretto Church exterior"
             />

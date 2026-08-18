@@ -11,7 +11,7 @@ const SpecialCelebrationsSection = () => {
         <div className="celebrations__banner">
           <div
             className="celebrations__bg"
-            style={{ backgroundImage: `url('/images/hero-community.jpg')` }}
+            style={{ backgroundImage: `url('${import.meta.env.BASE_URL}images/hero-community.jpg')` }}
             role="img"
             aria-label="Parish Feast Procession"
           />

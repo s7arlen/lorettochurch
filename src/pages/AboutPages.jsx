@@ -114,7 +114,7 @@ export const PatronessPage = () => (
       <div className="container" style={{ maxWidth: '900px' }}>
         <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
           <img
-            src="/images/patroness-mary.jpg"
+            src={`${import.meta.env.BASE_URL}images/patroness-mary.jpg`}
             alt="Our Lady of Loretto"
             style={{ width: '260px', height: '360px', objectFit: 'cover', borderRadius: 'var(--radius-md)', margin: '0 auto 1.5rem', border: '2px solid var(--gold-antique)', boxShadow: 'var(--shadow-strong)' }}
           />
