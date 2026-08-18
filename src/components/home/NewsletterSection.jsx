@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { FileText, Download, Eye, Calendar, ArrowRight } from 'lucide-react';
+import { FileText, Download, Eye } from 'lucide-react';
 import { newsletters } from '../../data/newsletter';
 import './NewsletterSection.css';
 

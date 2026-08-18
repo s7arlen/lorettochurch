@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Landmark, Calendar, Sparkles, MapPin, CheckCircle, Shield } from 'lucide-react';
+import { Landmark, Shield } from 'lucide-react';
 import { historyTimeline, parishFacts } from '../data/history';
 
 export const OurParishPage = () => (
