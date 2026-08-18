@@ -1,0 +1,99 @@
+.quick-access {
+  border-bottom: 1px solid var(--border-beige);
+  padding: 4rem 0;
+}
+
+.quick-access__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+.quick-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  text-decoration: none;
+  padding: 1.5rem 1rem;
+  border-radius: var(--radius-md);
+  background: var(--warm-white);
+  border: 1px solid var(--border-beige);
+  box-shadow: var(--shadow-soft);
+  transition: all var(--transition-med);
+}
+
+.quick-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-med);
+  border-color: var(--gold-antique);
+}
+
+.quick-card__image-container {
+  position: relative;
+  width: 130px;
+  height: 130px;
+  margin-bottom: 1.25rem;
+  border-radius: 50%;
+}
+
+.quick-card__image {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  transition: transform var(--transition-slow);
+}
+
+.quick-card__gold-ring {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1.5px solid var(--gold-antique);
+  box-shadow: 0 0 12px rgba(201, 164, 92, 0.25);
+  transition: all var(--transition-med);
+}
+
+.quick-card:hover .quick-card__image {
+  transform: scale(1.08);
+}
+
+.quick-card:hover .quick-card__gold-ring {
+  border-color: var(--gold-light);
+  box-shadow: 0 0 20px rgba(201, 164, 92, 0.45);
+}
+
+.quick-card__title {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--brown-primary);
+  margin-bottom: 0.35rem;
+  letter-spacing: 0.04em;
+  transition: color var(--transition-fast);
+}
+
+.quick-card:hover .quick-card__title {
+  color: var(--gold-antique);
+}
+
+.quick-card__subtitle {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+@media (max-width: 1024px) {
+  .quick-access__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 540px) {
+  .quick-access__grid {
+    grid-template-columns: 1fr;
+  }
+}

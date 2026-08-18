@@ -1,0 +1,115 @@
+.organizations__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem;
+}
+
+.org-card {
+  position: relative;
+  height: 320px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.75rem 1.5rem;
+  border: 1px solid var(--border-gold);
+  box-shadow: var(--shadow-soft);
+  text-decoration: none;
+}
+
+.org-card__image {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform var(--transition-slow);
+}
+
+.org-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(36, 19, 13, 0.2) 0%,
+    rgba(36, 19, 13, 0.75) 60%,
+    rgba(36, 19, 13, 0.95) 100%
+  );
+  transition: opacity var(--transition-med);
+}
+
+.org-card:hover .org-card__image {
+  transform: scale(1.08);
+}
+
+.org-card:hover .org-card__overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(36, 19, 13, 0.3) 0%,
+    rgba(36, 19, 13, 0.85) 50%,
+    rgba(36, 19, 13, 0.98) 100%
+  );
+}
+
+.org-card__content {
+  position: relative;
+  z-index: 10;
+}
+
+.org-card__title {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  color: var(--gold-light);
+  margin-bottom: 0.35rem;
+  font-weight: 500;
+}
+
+.org-card__desc {
+  font-size: 0.82rem;
+  color: var(--cream);
+  opacity: 0.85;
+  line-height: 1.5;
+  margin-bottom: 0.85rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.org-card__link {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold-antique);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: transform var(--transition-fast);
+}
+
+.org-card:hover .org-card__link {
+  color: var(--warm-white);
+  transform: translateX(4px);
+}
+
+.organizations__cta {
+  text-align: center;
+  margin-top: 2.5rem;
+}
+
+@media (max-width: 960px) {
+  .organizations__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .organizations__grid {
+    grid-template-columns: 1fr;
+  }
+  .org-card {
+    height: 280px;
+  }
+}

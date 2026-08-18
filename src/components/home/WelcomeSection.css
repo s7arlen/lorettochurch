@@ -1,0 +1,115 @@
+.welcome {
+  position: relative;
+  overflow: hidden;
+}
+
+.welcome__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3.5rem;
+  align-items: center;
+}
+
+.welcome__image-wrapper {
+  position: relative;
+  border-radius: var(--radius-md);
+  padding: 12px;
+}
+
+.welcome__image {
+  height: 440px;
+  border-radius: var(--radius-md);
+  background-size: cover;
+  background-position: center;
+  box-shadow: var(--shadow-med);
+}
+
+.welcome__image-border {
+  position: absolute;
+  inset: 0;
+  border: 1.5px solid var(--gold-antique);
+  border-radius: var(--radius-lg);
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.welcome__badge {
+  position: absolute;
+  bottom: -20px;
+  right: 20px;
+  background: var(--brown-primary);
+  border: 1px solid var(--gold-antique);
+  color: var(--cream);
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-med);
+  text-align: center;
+}
+
+.welcome__badge-year {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+}
+
+.welcome__badge-text {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  color: var(--cream);
+}
+
+.welcome__content {
+  display: flex;
+  flex-direction: column;
+}
+
+.welcome__title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 3.5vw, 2.7rem);
+  color: var(--brown-primary);
+  line-height: 1.15;
+  font-weight: 500;
+}
+
+.welcome__gold-divider {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold-antique), var(--gold-light));
+  margin: 1rem 0 1.25rem;
+}
+
+.welcome__subheading {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-style: italic;
+  color: var(--brown-muted);
+  margin-bottom: 1rem;
+  font-weight: 400;
+}
+
+.welcome__text {
+  font-size: 0.95rem;
+  color: var(--text-body);
+  line-height: 1.75;
+  margin-bottom: 1rem;
+}
+
+.welcome__cta-wrapper {
+  margin-top: 1rem;
+}
+
+@media (max-width: 900px) {
+  .welcome__grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .welcome__image {
+    height: 340px;
+  }
+}
