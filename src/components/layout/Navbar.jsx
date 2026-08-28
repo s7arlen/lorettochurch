@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ChevronDown, Heart } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
 import './Navbar.css';
 
 const navItems = [
@@ -69,13 +69,6 @@ const navItems = [
   { label: 'Contact', path: '/contact' },
 ];
 
-const NavbarCrossEmblem = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="navbar__emblem-svg">
-    <path d="M12 2V22M7 7H17" stroke="#7A1F2B" strokeWidth="2.2" strokeLinecap="round"/>
-    <circle cx="12" cy="7" r="1.5" fill="#C6A15B"/>
-  </svg>
-);
-
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
@@ -127,15 +120,6 @@ const Navbar = () => {
       aria-label="Main navigation"
     >
       <div className="container navbar__container">
-        {/* Brand Logo & Name */}
-        <Link to="/" className="navbar__brand" aria-label="Our Lady of Loretto Church Home">
-          <NavbarCrossEmblem />
-          <div className="navbar__brand-text">
-            <span className="navbar__brand-title">Our Lady of Loretto</span>
-            <span className="navbar__brand-sub">CHURCH • MANGALORE</span>
-          </div>
-        </Link>
-
         {/* Desktop Nav Items */}
         <ul className="navbar__list" role="menubar">
           {navItems.map((item) => (
@@ -181,24 +165,16 @@ const Navbar = () => {
           ))}
         </ul>
 
-        {/* Donate / Support CTA */}
-        <div className="navbar__actions">
-          <Link to="/contact" className="navbar__donate-btn">
-            <Heart size={14} className="navbar__donate-icon" />
-            <span>Donate / Support</span>
-          </Link>
-
-          {/* Mobile Toggle */}
-          <button
-            className="navbar__mobile-toggle"
-            onClick={() => setIsMobileOpen(!isMobileOpen)}
-            aria-label={isMobileOpen ? 'Close menu' : 'Open menu'}
-            aria-expanded={isMobileOpen}
-            aria-controls="mobile-nav"
-          >
-            {isMobileOpen ? <X size={22} /> : <Menu size={22} />}
-          </button>
-        </div>
+        {/* Mobile Toggle */}
+        <button
+          className="navbar__mobile-toggle"
+          onClick={() => setIsMobileOpen(!isMobileOpen)}
+          aria-label={isMobileOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={isMobileOpen}
+          aria-controls="mobile-nav"
+        >
+          {isMobileOpen ? <X size={22} /> : <Menu size={22} />}
+        </button>
       </div>
 
       {/* Mobile Drawer */}
@@ -208,10 +184,7 @@ const Navbar = () => {
         aria-hidden={!isMobileOpen}
       >
         <div className="navbar__mobile-header">
-          <div className="navbar__mobile-brand">
-            <NavbarCrossEmblem />
-            <span>Loretto Church</span>
-          </div>
+          <span className="navbar__mobile-title">MENU</span>
           <button
             className="navbar__mobile-close"
             onClick={() => setIsMobileOpen(false)}
@@ -252,11 +225,6 @@ const Navbar = () => {
               </li>
             ))}
           </ul>
-          <div className="navbar__mobile-donate-wrapper">
-            <Link to="/contact" className="btn btn--primary navbar__mobile-donate-btn">
-              <Heart size={15} /> Donate / Support Parish
-            </Link>
-          </div>
         </div>
       </div>
 
