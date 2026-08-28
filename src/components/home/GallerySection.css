@@ -1,119 +1,125 @@
-.gallery-section__categories {
-  display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-  margin-bottom: 2rem;
-}
+/* ============================================
+   PHOTO GALLERY SECTION — Burgundy Overlays & Gold Accents
+   ============================================ */
 
-.gallery-section__cat-btn {
-  padding: 0.45rem 1.15rem;
-  font-family: var(--font-sans);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--brown-primary);
-  background: var(--warm-white);
-  border: 1px solid var(--border-beige);
-  border-radius: var(--radius-sm);
-  transition: all var(--transition-fast);
-}
-
-.gallery-section__cat-btn.active,
-.gallery-section__cat-btn:hover {
-  background: var(--brown-primary);
-  color: var(--gold-light);
-  border-color: var(--brown-primary);
+.gallery-section {
+  background-color: var(--white);
+  padding: 5rem 0;
 }
 
 .gallery-section__grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.25rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 3rem;
 }
 
 .gallery-item {
   position: relative;
-  height: 220px;
+  height: 270px;
   border-radius: var(--radius-md);
   overflow: hidden;
-  border: 1px solid var(--border-gold);
-  box-shadow: var(--shadow-soft);
   cursor: pointer;
+  box-shadow: var(--shadow-subtle);
+  border: 1px solid var(--border-cream);
+  transition: transform var(--transition-med), box-shadow var(--transition-med);
 }
 
-.gallery-item__img {
+.gallery-item:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-med);
+}
+
+.gallery-item__image-bg {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  transition: transform var(--transition-slow);
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.gallery-item__overlay {
+.gallery-item:hover .gallery-item__image-bg {
+  transform: scale(1.08);
+}
+
+/* Dark Burgundy Overlay on Hover */
+.gallery-item__burgundy-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(36, 19, 13, 0.75);
+  background: linear-gradient(
+    180deg,
+    rgba(53, 21, 27, 0.3) 0%,
+    rgba(53, 21, 27, 0.88) 100%
+  );
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 1.5rem;
+  text-align: center;
   opacity: 0;
   transition: opacity var(--transition-med);
-  padding: 1rem;
-  text-align: center;
 }
 
-.gallery-item:hover .gallery-item__img {
-  transform: scale(1.08);
-}
-
-.gallery-item:hover .gallery-item__overlay {
+.gallery-item:hover .gallery-item__burgundy-overlay {
   opacity: 1;
 }
 
-.gallery-item__icon {
+.gallery-item__icon-wrapper {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--burgundy-primary);
+  border: 1px solid var(--gold-antique);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: var(--gold-light);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
+  transform: translateY(10px);
+  transition: transform 0.4s ease;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+
+.gallery-item:hover .gallery-item__icon-wrapper {
+  transform: translateY(0);
 }
 
 .gallery-item__title {
   font-family: var(--font-serif);
-  font-size: 1.1rem;
-  color: var(--warm-white);
-  line-height: 1.2;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--bg-ivory);
+  line-height: 1.25;
+  margin-bottom: 0.3rem;
 }
 
 .gallery-item__cat {
-  font-size: 0.65rem;
-  font-weight: 600;
-  letter-spacing: 0.15em;
+  font-family: var(--font-sans);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--gold-antique);
 }
 
 .gallery-section__cta {
   text-align: center;
-  margin-top: 2.5rem;
 }
 
-@media (max-width: 1024px) {
-  .gallery-section__grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (max-width: 700px) {
+/* Responsive */
+@media (max-width: 960px) {
   .gallery-section__grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 540px) {
   .gallery-section__grid {
     grid-template-columns: 1fr;
   }
+
   .gallery-item {
-    height: 240px;
+    height: 230px;
   }
 }

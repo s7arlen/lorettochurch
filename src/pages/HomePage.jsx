@@ -4,12 +4,12 @@ import { motion } from 'framer-motion';
 import { Calendar, MapPin, Clock, ArrowRight } from 'lucide-react';
 
 import HeroSlider from '../components/home/HeroSlider';
-import MassTimesStrip from '../components/home/MassTimesStrip';
 import WelcomeSection from '../components/home/WelcomeSection';
 import OurPatronessSection from '../components/home/OurPatronessSection';
 import PriestMessageSection from '../components/home/PriestMessageSection';
 import SpecialCelebrationsSection from '../components/home/SpecialCelebrationsSection';
 import GallerySection from '../components/home/GallerySection';
+import MassTimesStrip from '../components/home/MassTimesStrip';
 import LocationSection from '../components/home/LocationSection';
 
 import { events } from '../data/events';
@@ -76,39 +76,37 @@ const NewsItem = ({ item, index }) => (
 );
 
 /* ================================================================
-   HOME PAGE
-   Sections (in order):
+   HOME PAGE — Clean, Spacious & Focused Layout
+   Sections (in exact requested order):
    1. Hero Slider
-   2. Mass Times Strip
-   3. Welcome / About
-   4. Our Patroness
-   5. Priest's Message
-   6. Events + News (two-column)
-   7. Special Celebrations Banner
-   8. Gallery Highlight
-   9. Location
+   2. Welcome to Our Lady of Loretto (Church introduction)
+   3. Our Patroness (Devotion & History highlight)
+   4. Message from Parish Priest (Pastoral greeting)
+   5. Upcoming Events + Latest News (Side-by-side two-column updates)
+   6. Special Celebrations (Feast banner)
+   7. Photo Gallery Highlight (6 photos)
+   8. Mass Times Strip (Sits above the map as "Plan Your Visit" info)
+   9. Our Location (Map & Parish Address)
 ================================================================ */
 const HomePage = () => {
   return (
     <main id="main-content">
-
       {/* 1. Hero Slider */}
       <HeroSlider />
 
-      {/* 2. Welcome / About */}
+      {/* 2. Welcome to Our Lady of Loretto (Church introduction) */}
       <WelcomeSection />
 
-      {/* 4. Our Patroness */}
+      {/* 3. Our Patroness (Devotion & History highlight) */}
       <OurPatronessSection />
 
-      {/* 5. Priest's Message */}
+      {/* 4. Message from Parish Priest (Pastoral greeting) */}
       <PriestMessageSection />
 
-      {/* 6. Events + News — two-column combined layout */}
+      {/* 5. Upcoming Events + Latest News (Side-by-side two-column updates) */}
       <section className="home-updates" aria-label="Upcoming Events and Latest News">
         <div className="container">
           <div className="home-updates__grid">
-
             {/* Left: Upcoming Events */}
             <div className="home-updates__col">
               <div className="home-updates__col-heading">
@@ -148,23 +146,21 @@ const HomePage = () => {
                 </Link>
               </div>
             </div>
-
           </div>
         </div>
       </section>
 
-      {/* 7. Special Celebrations Banner */}
+      {/* 6. Special Celebrations (Feast banner) */}
       <SpecialCelebrationsSection />
 
-      {/* 8. Gallery Highlight (simplified — 6 photos, no filter) */}
+      {/* 7. Photo Gallery Highlight (6 photos) */}
       <GallerySection />
 
-      {/* 9. Mass Times Strip — sits above the map as "Plan Your Visit" info */}
+      {/* 8. Mass Times Strip (Sits naturally as "Plan Your Visit" info right above the map) */}
       <MassTimesStrip />
 
-      {/* 10. Location */}
+      {/* 9. Our Location (Map & Parish Address) */}
       <LocationSection />
-
     </main>
   );
 };
