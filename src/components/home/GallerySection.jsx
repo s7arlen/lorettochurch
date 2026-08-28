@@ -2,22 +2,28 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Maximize2, ArrowRight } from 'lucide-react';
-import { galleryImages, galleryCategories } from '../../data/gallery';
+import { galleryImages } from '../../data/gallery';
 import Lightbox from '../common/Lightbox';
 import './GallerySection.css';
 
-const GallerySection = () => {
-  const [activeCategory, setActiveCategory] = useState('All');
-  const [lightboxIndex, setLightboxIndex] = useState(null);
+// On the homepage we show only the first 6 images — no filter needed.
+// The full filterable gallery is available at /media/gallery.
+const HOME_GALLERY_COUNT = 6;
 
-  const filteredImages = activeCategory === 'All'
-    ? galleryImages
-    : galleryImages.filter(img => img.category === activeCategory);
+const GallerySection = () => {
+  const previewImages = galleryImages.slice(0, HOME_GALLERY_COUNT);
+  const [lightboxIndex, setLightboxIndex] = useState(null);
 
   const handleOpenLightbox = (index) => setLightboxIndex(index);
   const handleCloseLightbox = () => setLightboxIndex(null);
-  const handlePrev = () => setLightboxIndex((prev) => (prev > 0 ? prev - 1 : filteredImages.length - 1));
-  const handleNext = () => setLightboxIndex((prev) => (prev < filteredImages.length - 1 ? prev + 1 : 0));
+  const handlePrev = () =>
+    setLightboxIndex((prev) =>
+      prev > 0 ? prev - 1 : previewImages.length - 1
+    );
+  const handleNext = () =>
+    setLightboxIndex((prev) =>
+      prev < previewImages.length - 1 ? prev + 1 : 0
+    );
 
   return (
     <section className="gallery-section section section--cream" aria-label="Photo Gallery">
@@ -30,29 +36,15 @@ const GallerySection = () => {
           </p>
         </div>
 
-        {/* Categories */}
-        <div className="gallery-section__categories">
-          {galleryCategories.map((cat) => (
-            <button
-              key={cat}
-              className={`gallery-section__cat-btn ${activeCategory === cat ? 'active' : ''}`}
-              onClick={() => setActiveCategory(cat)}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-
-        {/* Grid */}
-        <motion.div layout className="gallery-section__grid">
-          {filteredImages.map((img, index) => (
+        {/* Grid — no category filter on homepage */}
+        <div className="gallery-section__grid">
+          {previewImages.map((img, index) => (
             <motion.div
-              layout
               key={img.id}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.4 }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: index * 0.06 }}
               className="gallery-item"
               onClick={() => handleOpenLightbox(index)}
             >
@@ -64,7 +56,7 @@ const GallerySection = () => {
               </div>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
 
         <div className="gallery-section__cta">
           <Link to="/media/gallery" className="btn btn--outline">
@@ -76,7 +68,7 @@ const GallerySection = () => {
         {/* Lightbox Modal */}
         <Lightbox
           isOpen={lightboxIndex !== null}
-          image={lightboxIndex !== null ? filteredImages[lightboxIndex] : null}
+          image={lightboxIndex !== null ? previewImages[lightboxIndex] : null}
           onClose={handleCloseLightbox}
           onPrev={handlePrev}
           onNext={handleNext}

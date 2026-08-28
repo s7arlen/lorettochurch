@@ -309,7 +309,7 @@
     display: block;
   }
 
-  /* Mobile brand in navbar */
+  /* Mobile brand in navbar - only visible when scrolled so it doesn't duplicate the main Header */
   .navbar__container::before {
     content: 'OUR LADY OF LORETTO CHURCH';
     font-family: var(--font-sans);
@@ -317,6 +317,12 @@
     font-weight: 700;
     letter-spacing: 0.15em;
     color: var(--gold-light);
+    opacity: 0;
+    transition: opacity var(--transition-med);
+    pointer-events: none;
+  }
+
+  .navbar--scrolled .navbar__container::before {
     opacity: 0.85;
   }
 }

@@ -1,75 +1,170 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { Calendar, MapPin, Clock, ArrowRight } from 'lucide-react';
+
 import HeroSlider from '../components/home/HeroSlider';
-import QuickAccess from '../components/home/QuickAccess';
+import MassTimesStrip from '../components/home/MassTimesStrip';
 import WelcomeSection from '../components/home/WelcomeSection';
-import ParishHistorySection from '../components/home/ParishHistorySection';
 import OurPatronessSection from '../components/home/OurPatronessSection';
 import PriestMessageSection from '../components/home/PriestMessageSection';
-import ParishLeadershipSection from '../components/home/ParishLeadershipSection';
-import MassScheduleSection from '../components/home/MassScheduleSection';
-import ParishOrganizationsSection from '../components/home/ParishOrganizationsSection';
-import UpcomingEventsSection from '../components/home/UpcomingEventsSection';
-import LatestNewsSection from '../components/home/LatestNewsSection';
-import NewsletterSection from '../components/home/NewsletterSection';
 import SpecialCelebrationsSection from '../components/home/SpecialCelebrationsSection';
-import VideoSection from '../components/home/VideoSection';
 import GallerySection from '../components/home/GallerySection';
 import LocationSection from '../components/home/LocationSection';
-import ContactSection from '../components/home/ContactSection';
 
+import { events } from '../data/events';
+import { news } from '../data/news';
+
+import './HomePage.css';
+
+/* ---- Inline Event Item ---- */
+const EventItem = ({ item, index }) => (
+  <motion.div
+    className="home-event-item"
+    initial={{ opacity: 0, x: -16 }}
+    whileInView={{ opacity: 1, x: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.45, delay: index * 0.09 }}
+  >
+    <div className="home-event-item__date">
+      <span className="home-event-item__day">{item.day}</span>
+      <span className="home-event-item__month">{item.month}</span>
+    </div>
+    <div className="home-event-item__body">
+      <span className="home-event-item__category">{item.category}</span>
+      <h3 className="home-event-item__title">
+        <Link to={`/events#event-${item.id}`}>{item.title}</Link>
+      </h3>
+      <div className="home-event-item__meta">
+        <span><Clock size={12} aria-hidden="true" /> {item.time}</span>
+        <span><MapPin size={12} aria-hidden="true" /> {item.location}</span>
+      </div>
+    </div>
+  </motion.div>
+);
+
+/* ---- Inline News Item ---- */
+const NewsItem = ({ item, index }) => (
+  <motion.article
+    className="home-news-item"
+    initial={{ opacity: 0, x: 16 }}
+    whileInView={{ opacity: 1, x: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.45, delay: index * 0.09 }}
+  >
+    <div className="home-news-item__image-col">
+      <div
+        className="home-news-item__image"
+        style={{ backgroundImage: `url(${item.image})` }}
+        role="img"
+        aria-label={item.title}
+      />
+    </div>
+    <div className="home-news-item__body">
+      <div className="home-news-item__meta">
+        <span className="home-news-item__category">{item.category}</span>
+        <span className="home-news-item__date">
+          <Calendar size={11} aria-hidden="true" /> {item.displayDate}
+        </span>
+      </div>
+      <h3 className="home-news-item__title">
+        <Link to={`/news#${item.slug}`}>{item.title}</Link>
+      </h3>
+      <p className="home-news-item__excerpt">{item.excerpt}</p>
+    </div>
+  </motion.article>
+);
+
+/* ================================================================
+   HOME PAGE
+   Sections (in order):
+   1. Hero Slider
+   2. Mass Times Strip
+   3. Welcome / About
+   4. Our Patroness
+   5. Priest's Message
+   6. Events + News (two-column)
+   7. Special Celebrations Banner
+   8. Gallery Highlight
+   9. Location
+================================================================ */
 const HomePage = () => {
   return (
     <main id="main-content">
-      {/* 3. Hero Slider */}
+
+      {/* 1. Hero Slider */}
       <HeroSlider />
 
-      {/* 4. Quick Access Circular Cards */}
-      <QuickAccess />
-
-      {/* 5. Welcome to Our Lady of Loretto */}
+      {/* 2. Welcome / About */}
       <WelcomeSection />
 
-      {/* 6. Our Parish & History */}
-      <ParishHistorySection />
-
-      {/* 7. Our Patroness */}
+      {/* 4. Our Patroness */}
       <OurPatronessSection />
 
-      {/* 8. Message from Parish Priest */}
+      {/* 5. Priest's Message */}
       <PriestMessageSection />
 
-      {/* 9. Parish Leadership */}
-      <ParishLeadershipSection />
+      {/* 6. Events + News — two-column combined layout */}
+      <section className="home-updates" aria-label="Upcoming Events and Latest News">
+        <div className="container">
+          <div className="home-updates__grid">
 
-      {/* 10. Mass Schedule */}
-      <MassScheduleSection />
+            {/* Left: Upcoming Events */}
+            <div className="home-updates__col">
+              <div className="home-updates__col-heading">
+                <span className="section-heading__label">Calendar of Faith</span>
+                <h2>Upcoming Events</h2>
+              </div>
 
-      {/* 11. Parish Organizations */}
-      <ParishOrganizationsSection />
+              <div className="home-updates__items">
+                {events.slice(0, 3).map((item, index) => (
+                  <EventItem key={item.id} item={item} index={index} />
+                ))}
+              </div>
 
-      {/* 12. Upcoming Events */}
-      <UpcomingEventsSection />
+              <div className="home-updates__cta">
+                <Link to="/events" className="btn btn--outline">
+                  All Events <ArrowRight size={14} aria-hidden="true" />
+                </Link>
+              </div>
+            </div>
 
-      {/* 13. Latest News */}
-      <LatestNewsSection />
+            {/* Right: Latest News */}
+            <div className="home-updates__col">
+              <div className="home-updates__col-heading">
+                <span className="section-heading__label">Announcements & Updates</span>
+                <h2>Latest News</h2>
+              </div>
 
-      {/* 14. Parish Newsletter */}
-      <NewsletterSection />
+              <div className="home-updates__items">
+                {news.slice(0, 3).map((item, index) => (
+                  <NewsItem key={item.id} item={item} index={index} />
+                ))}
+              </div>
 
-      {/* 15. Special Celebrations */}
+              <div className="home-updates__cta">
+                <Link to="/news" className="btn btn--outline">
+                  All News <ArrowRight size={14} aria-hidden="true" />
+                </Link>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* 7. Special Celebrations Banner */}
       <SpecialCelebrationsSection />
 
-      {/* 16. Parish Video */}
-      <VideoSection />
-
-      {/* 17. Photo Gallery */}
+      {/* 8. Gallery Highlight (simplified — 6 photos, no filter) */}
       <GallerySection />
 
-      {/* 18. Location / Google Map */}
+      {/* 9. Mass Times Strip — sits above the map as "Plan Your Visit" info */}
+      <MassTimesStrip />
+
+      {/* 10. Location */}
       <LocationSection />
 
-      {/* 19. Contact */}
-      <ContactSection />
     </main>
   );
 };
