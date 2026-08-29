@@ -1,18 +1,27 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { Maximize2, ArrowRight, Camera } from 'lucide-react';
+import { Camera, ArrowRight } from 'lucide-react';
 import { galleryImages } from '../../data/gallery';
+import AccordionGallery from '../common/AccordionGallery';
 import Lightbox from '../common/Lightbox';
 import './GallerySection.css';
 
-const HOME_GALLERY_COUNT = 6;
-
 const GallerySection = () => {
-  const previewImages = galleryImages.slice(0, HOME_GALLERY_COUNT);
   const [lightboxIndex, setLightboxIndex] = useState(null);
 
-  const handleOpenLightbox = (index) => setLightboxIndex(index);
+  // Take top 6 images for the interactive accordion
+  const previewImages = galleryImages.slice(0, 6);
+
+  const accordionItems = previewImages.map((img) => ({
+    image: img.src,
+    label: img.title,
+    alt: img.alt,
+  }));
+
+  const handleItemClick = (index) => {
+    setLightboxIndex(index);
+  };
+
   const handleCloseLightbox = () => setLightboxIndex(null);
   const handlePrev = () =>
     setLightboxIndex((prev) =>
@@ -34,33 +43,26 @@ const GallerySection = () => {
           </p>
         </div>
 
-        {/* Masonry / Grid Container */}
-        <div className="gallery-section__grid">
-          {previewImages.map((img, index) => (
-            <motion.div
-              key={img.id}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: index * 0.06 }}
-              className="gallery-item"
-              onClick={() => handleOpenLightbox(index)}
-            >
-              <div
-                className="gallery-item__image-bg"
-                style={{ backgroundImage: `url(${img.src})` }}
-                role="img"
-                aria-label={img.alt}
-              />
-              <div className="gallery-item__burgundy-overlay">
-                <div className="gallery-item__icon-wrapper">
-                  <Maximize2 size={20} className="gallery-item__icon" />
-                </div>
-                <h3 className="gallery-item__title">{img.title}</h3>
-                <span className="gallery-item__cat">{img.category}</span>
-              </div>
-            </motion.div>
-          ))}
+        {/* Interactive Accordion Gallery */}
+        <div className="gallery-section__accordion-wrap">
+          <AccordionGallery
+            items={accordionItems}
+            defaultIndex={2}
+            accentColor="#C6A15B"
+            overlayColor="#35151B"
+            textColor="#FAF7F0"
+            height={500}
+            gap={14}
+            radius={18}
+            expandRatio={0.48}
+            trigger="hover"
+            grayscale={true}
+            showLabels={true}
+            parallax={0.6}
+            tilt={6}
+            duration={0.65}
+            onItemClick={handleItemClick}
+          />
         </div>
 
         <div className="gallery-section__cta">

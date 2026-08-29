@@ -125,9 +125,8 @@ const Navbar = () => {
       role="navigation"
       aria-label="Main navigation"
     >
-      <div className="navbar__bar">
-
-        {/* ── LEFT: News Ticker ── */}
+      {/* ── ROW 1: News Ticker (Full Width on Desktop, with Hamburger on Mobile) ── */}
+      <div className="navbar__ticker-row">
         <div className="navbar__ticker" role="region" aria-label="Latest parish news">
           <div className="navbar__ticker-label" aria-hidden="true">
             <span className="navbar__ticker-dot" />
@@ -152,52 +151,7 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* ── RIGHT: Desktop Nav Links ── */}
-        <ul className="navbar__list" role="menubar">
-          {navItems.map((item) => (
-            <li
-              key={item.label}
-              className={`navbar__item ${item.dropdown ? 'navbar__item--has-dropdown' : ''} ${isActive(item.path) ? 'navbar__item--active' : ''}`}
-              role="none"
-              onMouseEnter={() => item.dropdown && setOpenDropdown(item.label)}
-              onMouseLeave={() => setOpenDropdown(null)}
-            >
-              <Link
-                to={item.path}
-                className="navbar__link"
-                role="menuitem"
-                aria-haspopup={item.dropdown ? 'true' : undefined}
-                aria-expanded={openDropdown === item.label ? 'true' : 'false'}
-              >
-                {item.label}
-                {item.dropdown && <ChevronDown size={13} className="navbar__chevron" aria-hidden="true" />}
-              </Link>
-
-              {item.dropdown && (
-                <div
-                  className={`navbar__dropdown ${openDropdown === item.label ? 'navbar__dropdown--open' : ''}`}
-                  role="menu"
-                  aria-label={`${item.label} submenu`}
-                >
-                  <div className="navbar__dropdown-inner">
-                    {item.dropdown.map((sub) => (
-                      <Link
-                        key={sub.label}
-                        to={sub.path}
-                        className="navbar__dropdown-link"
-                        role="menuitem"
-                      >
-                        {sub.label}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </li>
-          ))}
-        </ul>
-
-        {/* ── Mobile Hamburger ── */}
+        {/* Mobile Toggle Button (only visible on mobile) */}
         <button
           className="navbar__mobile-toggle"
           onClick={() => setIsMobileOpen(!isMobileOpen)}
@@ -207,6 +161,55 @@ const Navbar = () => {
         >
           {isMobileOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
+      </div>
+
+      {/* ── ROW 2: Navigation Links (Desktop view only) ── */}
+      <div className="navbar__menu-row">
+        <div className="container navbar__menu-container">
+          <ul className="navbar__list" role="menubar">
+            {navItems.map((item) => (
+              <li
+                key={item.label}
+                className={`navbar__item ${item.dropdown ? 'navbar__item--has-dropdown' : ''} ${isActive(item.path) ? 'navbar__item--active' : ''}`}
+                role="none"
+                onMouseEnter={() => item.dropdown && setOpenDropdown(item.label)}
+                onMouseLeave={() => setOpenDropdown(null)}
+              >
+                <Link
+                  to={item.path}
+                  className="navbar__link"
+                  role="menuitem"
+                  aria-haspopup={item.dropdown ? 'true' : undefined}
+                  aria-expanded={openDropdown === item.label ? 'true' : 'false'}
+                >
+                  {item.label}
+                  {item.dropdown && <ChevronDown size={13} className="navbar__chevron" aria-hidden="true" />}
+                </Link>
+
+                {item.dropdown && (
+                  <div
+                    className={`navbar__dropdown ${openDropdown === item.label ? 'navbar__dropdown--open' : ''}`}
+                    role="menu"
+                    aria-label={`${item.label} submenu`}
+                  >
+                    <div className="navbar__dropdown-inner">
+                      {item.dropdown.map((sub) => (
+                        <Link
+                          key={sub.label}
+                          to={sub.path}
+                          className="navbar__dropdown-link"
+                          role="menuitem"
+                        >
+                          {sub.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
 
       {/* Mobile Drawer */}

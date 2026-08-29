@@ -1,125 +1,28 @@
 /* ============================================
-   PHOTO GALLERY SECTION — Burgundy Overlays & Gold Accents
+   PHOTO GALLERY SECTION — Accordion Gallery
    ============================================ */
 
 .gallery-section {
   background-color: var(--white);
-  padding: 5rem 0;
-}
-
-.gallery-section__grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  margin-bottom: 3rem;
-}
-
-.gallery-item {
+  padding: 5.5rem 0;
   position: relative;
-  height: 270px;
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  cursor: pointer;
-  box-shadow: var(--shadow-subtle);
-  border: 1px solid var(--border-cream);
-  transition: transform var(--transition-med), box-shadow var(--transition-med);
 }
 
-.gallery-item:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-med);
-}
-
-.gallery-item__image-bg {
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.gallery-item:hover .gallery-item__image-bg {
-  transform: scale(1.08);
-}
-
-/* Dark Burgundy Overlay on Hover */
-.gallery-item__burgundy-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(53, 21, 27, 0.3) 0%,
-    rgba(53, 21, 27, 0.88) 100%
-  );
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 1.5rem;
-  text-align: center;
-  opacity: 0;
-  transition: opacity var(--transition-med);
-}
-
-.gallery-item:hover .gallery-item__burgundy-overlay {
-  opacity: 1;
-}
-
-.gallery-item__icon-wrapper {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: var(--burgundy-primary);
-  border: 1px solid var(--gold-antique);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--gold-light);
-  margin-bottom: 0.75rem;
-  transform: translateY(10px);
-  transition: transform 0.4s ease;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
-}
-
-.gallery-item:hover .gallery-item__icon-wrapper {
-  transform: translateY(0);
-}
-
-.gallery-item__title {
-  font-family: var(--font-serif);
-  font-size: 1.15rem;
-  font-weight: 600;
-  color: var(--bg-ivory);
-  line-height: 1.25;
-  margin-bottom: 0.3rem;
-}
-
-.gallery-item__cat {
-  font-family: var(--font-sans);
-  font-size: 0.62rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--gold-antique);
+.gallery-section__accordion-wrap {
+  margin-bottom: 3.5rem;
+  box-shadow: 0 16px 45px rgba(53, 21, 27, 0.08);
+  border-radius: 18px;
 }
 
 .gallery-section__cta {
   text-align: center;
 }
 
-/* Responsive */
-@media (max-width: 960px) {
-  .gallery-section__grid {
-    grid-template-columns: repeat(2, 1fr);
+@media (max-width: 768px) {
+  .gallery-section {
+    padding: 3.5rem 0;
   }
-}
-
-@media (max-width: 540px) {
-  .gallery-section__grid {
-    grid-template-columns: 1fr;
-  }
-
-  .gallery-item {
-    height: 230px;
+  .gallery-section__accordion-wrap {
+    margin-bottom: 2.5rem;
   }
 }
