@@ -2,15 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Footer.css';
 
-const FooterChurchEmblem = () => (
-  <svg width="40" height="40" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <circle cx="26" cy="26" r="24" stroke="#C6A15B" strokeWidth="1.2" fill="none" opacity="0.6"/>
-    <circle cx="26" cy="26" r="20" stroke="#C6A15B" strokeWidth="0.8" fill="none" opacity="0.3"/>
-    <rect x="24.5" y="10" width="3" height="22" rx="1" fill="#C6A15B"/>
-    <rect x="17" y="18" width="18" height="3" rx="1" fill="#C6A15B"/>
-    <circle cx="26" cy="36" r="2" fill="#C6A15B" opacity="0.8"/>
-  </svg>
-);
+
 
 const FacebookIcon = () => (
   <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
@@ -34,6 +26,7 @@ const InstagramIcon = () => (
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const logoUrl = `${import.meta.env.BASE_URL}favicon.png`;
 
   return (
     <footer className="footer" role="contentinfo">
@@ -41,7 +34,7 @@ const Footer = () => {
         <div className="footer__content">
           {/* Brand & Identity */}
           <div className="footer__brand">
-            <FooterChurchEmblem />
+            <img src={logoUrl} alt="Our Lady of Loretto Church Logo" className="footer__logo" />
             <h2 className="footer__title">Our Lady of Loretto Church</h2>
             <p className="footer__subtitle">Loretto • Mangalore • Diocese of Mangalore</p>
           </div>

@@ -1,7 +1,7 @@
 // [PLACEHOLDER] — Replace with actual parish leadership names
 export const leadership = {
   parishPriest: {
-    name: '[PLACEHOLDER — Parish Priest Name]',
+    name: 'James D\'Souza',
     title: 'Parish Priest',
     designation: 'Rev. Fr.',
     image: `${import.meta.env.BASE_URL}images/priest-portrait.jpg`,
@@ -11,7 +11,7 @@ export const leadership = {
   pastoralTeam: [
     {
       id: 1,
-      name: '[PLACEHOLDER — Parish Priest]',
+      name: 'James D\'Souza',
       designation: 'Rev. Fr.',
       position: 'Parish Priest',
       image: `${import.meta.env.BASE_URL}images/priest-portrait.jpg`,
@@ -25,7 +25,7 @@ export const leadership = {
     },
   ],
   parishCouncil: [
-    { id: 1, name: '[PLACEHOLDER]', position: 'Parish Priest (Ex-officio President)', image: `${import.meta.env.BASE_URL}images/priest-portrait.jpg` },
+    { id: 1, name: 'James D\'Souza', position: 'Parish Priest (Ex-officio President)', image: `${import.meta.env.BASE_URL}images/priest-portrait.jpg` },
     { id: 2, name: '[PLACEHOLDER]', position: 'President', image: `${import.meta.env.BASE_URL}images/hero-exterior.jpg` },
     { id: 3, name: '[PLACEHOLDER]', position: 'Vice President', image: `${import.meta.env.BASE_URL}images/hero-exterior.jpg` },
     { id: 4, name: '[PLACEHOLDER]', position: 'Secretary', image: `${import.meta.env.BASE_URL}images/hero-exterior.jpg` },

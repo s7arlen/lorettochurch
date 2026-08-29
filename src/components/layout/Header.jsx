@@ -1,25 +1,31 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Header.css';
 
 const Header = () => {
+  const logoUrl = `${import.meta.env.BASE_URL}favicon.png`;
+
   return (
     <header className="site-header" role="banner">
       <div className="site-header__texture" aria-hidden="true" />
       <div className="container">
         <div className="site-header__inner">
-          <div className="site-header__identity">
-            <h1 className="site-header__name">
-              <span className="site-header__title-text">Our Lady of Loretto Church</span>
-            </h1>
+          <Link to="/" className="site-header__brand-link" aria-label="Our Lady of Loretto Church Home">
+            <img
+              src={logoUrl}
+              alt="Our Lady of Loretto Church Logo"
+              className="site-header__logo"
+            />
+            <div className="site-header__identity">
+              <h1 className="site-header__name">
+                <span className="site-header__title-text">Our Lady of Loretto Church</span>
+              </h1>
 
-            <div className="site-header__location">
-              <span className="site-header__location-item">Loretto</span>
-              <span className="site-header__dot">✦</span>
-              <span className="site-header__location-item">Mangalore</span>
-              <span className="site-header__dot">✦</span>
-              <span className="site-header__location-item">Karnataka, India</span>
+              <div className="site-header__location">
+                <span className="site-header__location-item">Loretto, Bantwal</span>
+              </div>
             </div>
-          </div>
+          </Link>
         </div>
       </div>
       <div className="site-header__gold-line" aria-hidden="true">

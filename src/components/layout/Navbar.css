@@ -291,10 +291,25 @@
   padding-left: 2.25rem;
 }
 
+.navbar__mobile-drawer-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.navbar__mobile-drawer-logo {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--gold-antique);
+}
+
 /* ---- Responsive Breakdown ---- */
 @media (max-width: 1080px) {
   .navbar__container {
     justify-content: flex-end;
+    height: 54px;
   }
 
   .navbar__list {

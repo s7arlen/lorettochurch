@@ -112,6 +112,8 @@ const Navbar = () => {
     return location.pathname.startsWith(path);
   };
 
+  const logoUrl = `${import.meta.env.BASE_URL}favicon.png`;
+
   return (
     <nav
       ref={navRef}
@@ -184,7 +186,10 @@ const Navbar = () => {
         aria-hidden={!isMobileOpen}
       >
         <div className="navbar__mobile-header">
-          <span className="navbar__mobile-title">MENU</span>
+          <div className="navbar__mobile-drawer-brand">
+            <img src={logoUrl} alt="" className="navbar__mobile-drawer-logo" />
+            <span className="navbar__mobile-title">MENU</span>
+          </div>
           <button
             className="navbar__mobile-close"
             onClick={() => setIsMobileOpen(false)}

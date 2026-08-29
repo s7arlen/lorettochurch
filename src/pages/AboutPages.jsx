@@ -19,6 +19,21 @@ export const OurParishPage = () => (
     <section className="section section--white">
       <div className="container" style={{ maxWidth: '900px' }}>
         <h2 className="section-heading__title" style={{ marginBottom: '1.5rem' }}>Welcome to Our Lady of Loretto Parish</h2>
+
+        {/* Church exterior photo */}
+        <div style={{ position: 'relative', marginBottom: '2.5rem', borderRadius: 'var(--radius-lg)', overflow: 'hidden', boxShadow: 'var(--shadow-strong)', border: '2px solid var(--gold-antique)' }}>
+          <img
+            src={`${import.meta.env.BASE_URL}images/church-exterior.jpg`}
+            alt="Our Lady of Loretto Church, Loretto, Mangalore"
+            style={{ width: '100%', height: '420px', objectFit: 'cover', display: 'block' }}
+          />
+          <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'linear-gradient(to top, rgba(53,21,27,0.75) 0%, transparent 100%)', padding: '1.25rem 1.5rem' }}>
+            <p style={{ color: 'var(--gold-light)', fontFamily: 'var(--font-serif)', fontSize: '1.1rem', margin: 0, letterSpacing: '0.03em' }}>
+              Our Lady of Loretto Church — Loretto, Mangalore
+            </p>
+          </div>
+        </div>
+
         <p style={{ fontSize: '1.05rem', lineHeight: '1.8', marginBottom: '1.25rem' }}>
           Our Lady of Loretto Church, situated in Loretto, Mangalore, is a sacred home of faith, hope and Christian service. Our parish community is dedicated to worshipping God, growing in communion, and spreading Christ's love across the region.
         </p>
@@ -59,6 +74,15 @@ export const HistoryPage = () => (
           <span className="section-heading__label">Timeline of Faith</span>
           <h2 className="section-heading__title">Historical Milestones</h2>
           <p className="section-heading__subtitle">Journey through the rich foundation and growth of Our Lady of Loretto Parish</p>
+        </div>
+
+        {/* Church exterior photo banner */}
+        <div style={{ maxWidth: '850px', margin: '0 auto 2.5rem', borderRadius: 'var(--radius-lg)', overflow: 'hidden', boxShadow: 'var(--shadow-strong)', border: '2px solid var(--border-gold)' }}>
+          <img
+            src={`${import.meta.env.BASE_URL}images/church-exterior.jpg`}
+            alt="Our Lady of Loretto Church — historical landmark"
+            style={{ width: '100%', height: '320px', objectFit: 'cover', display: 'block' }}
+          />
         </div>
 
         <div style={{ maxWidth: '850px', margin: '0 auto', position: 'relative' }}>
@@ -119,7 +143,50 @@ export const PatronessPage = () => (
             style={{ width: '260px', height: '360px', objectFit: 'cover', borderRadius: 'var(--radius-md)', margin: '0 auto 1.5rem', border: '2px solid var(--gold-antique)', boxShadow: 'var(--shadow-strong)' }}
           />
           <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '2.4rem', color: 'var(--gold-antique)' }}>"Our Lady of Loretto, Pray For Us"</h2>
-          <p style={{ fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.15em', color: 'var(--brown-muted)', marginTop: '0.3rem' }}>Annual Feast Day: December 10</p>
+          {/* Feast Day Badge */}
+          <div style={{
+            display: 'inline-flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            marginTop: '1.5rem',
+            padding: '0',
+          }}>
+            {/* Top decorative line */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.9rem' }}>
+              <span style={{ display: 'block', width: '40px', height: '1px', background: 'linear-gradient(to right, transparent, var(--gold-antique))' }} />
+              <span style={{ color: 'var(--gold-antique)', fontSize: '0.75rem' }}>✦</span>
+              <span style={{ display: 'block', width: '40px', height: '1px', background: 'linear-gradient(to left, transparent, var(--gold-antique))' }} />
+            </div>
+
+            <div style={{
+              border: '1.5px solid var(--gold-antique)',
+              borderRadius: '12px',
+              padding: '1rem 2.2rem',
+              background: 'linear-gradient(135deg, rgba(198,161,91,0.07) 0%, rgba(198,161,91,0.02) 100%)',
+              boxShadow: '0 2px 18px rgba(198,161,91,0.13), inset 0 0 0 1px rgba(198,161,91,0.08)',
+              position: 'relative',
+            }}>
+              {/* Corner accents */}
+              <span style={{ position: 'absolute', top: '6px', left: '8px', width: '8px', height: '8px', borderTop: '1.5px solid var(--gold-antique)', borderLeft: '1.5px solid var(--gold-antique)', borderRadius: '2px 0 0 0', opacity: 0.7 }} />
+              <span style={{ position: 'absolute', top: '6px', right: '8px', width: '8px', height: '8px', borderTop: '1.5px solid var(--gold-antique)', borderRight: '1.5px solid var(--gold-antique)', borderRadius: '0 2px 0 0', opacity: 0.7 }} />
+              <span style={{ position: 'absolute', bottom: '6px', left: '8px', width: '8px', height: '8px', borderBottom: '1.5px solid var(--gold-antique)', borderLeft: '1.5px solid var(--gold-antique)', borderRadius: '0 0 0 2px', opacity: 0.7 }} />
+              <span style={{ position: 'absolute', bottom: '6px', right: '8px', width: '8px', height: '8px', borderBottom: '1.5px solid var(--gold-antique)', borderRight: '1.5px solid var(--gold-antique)', borderRadius: '0 0 2px 0', opacity: 0.7 }} />
+
+              <p style={{ fontSize: '0.65rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.22em', color: 'var(--gold-antique)', margin: '0 0 0.4rem', fontFamily: 'var(--font-sans)' }}>
+                Annual Feast Day
+              </p>
+              <p style={{ fontFamily: 'var(--font-serif)', fontSize: '1.7rem', fontWeight: 600, color: 'var(--brown-primary)', margin: 0, letterSpacing: '0.02em', lineHeight: 1.1 }}>
+                December 10
+              </p>
+            </div>
+
+            {/* Bottom decorative line */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginTop: '0.9rem' }}>
+              <span style={{ display: 'block', width: '40px', height: '1px', background: 'linear-gradient(to right, transparent, var(--gold-antique))' }} />
+              <span style={{ color: 'var(--gold-antique)', fontSize: '0.75rem' }}>✦</span>
+              <span style={{ display: 'block', width: '40px', height: '1px', background: 'linear-gradient(to left, transparent, var(--gold-antique))' }} />
+            </div>
+          </div>
         </div>
 
         <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.6rem', color: 'var(--brown-primary)', marginBottom: '1rem' }}>The Significance of Our Lady of Loretto</h3>
