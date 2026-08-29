@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown } from 'lucide-react';
+import { news } from '../../data/news';
 import './Navbar.css';
 
 const navItems = [
@@ -69,6 +70,9 @@ const navItems = [
   { label: 'Contact', path: '/contact' },
 ];
 
+// Duplicate for seamless loop
+const tickerItems = [...news, ...news];
+
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
@@ -121,8 +125,34 @@ const Navbar = () => {
       role="navigation"
       aria-label="Main navigation"
     >
-      <div className="container navbar__container">
-        {/* Desktop Nav Items */}
+      <div className="navbar__bar">
+
+        {/* ── LEFT: News Ticker ── */}
+        <div className="navbar__ticker" role="region" aria-label="Latest parish news">
+          <div className="navbar__ticker-label" aria-hidden="true">
+            <span className="navbar__ticker-dot" />
+            <span>Latest News</span>
+          </div>
+          <div className="navbar__ticker-track-wrap">
+            <ul className="navbar__ticker-track" aria-live="off">
+              {tickerItems.map((item, idx) => (
+                <li key={`${item.id}-${idx}`} className="navbar__ticker-item">
+                  <span className="navbar__ticker-cat">{item.category}</span>
+                  <Link
+                    to={`/news#${item.slug}`}
+                    className="navbar__ticker-text"
+                    tabIndex={idx < news.length ? 0 : -1}
+                  >
+                    {item.title}
+                  </Link>
+                  <span className="navbar__ticker-sep" aria-hidden="true">✦</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* ── RIGHT: Desktop Nav Links ── */}
         <ul className="navbar__list" role="menubar">
           {navItems.map((item) => (
             <li
@@ -167,7 +197,7 @@ const Navbar = () => {
           ))}
         </ul>
 
-        {/* Mobile Toggle */}
+        {/* ── Mobile Hamburger ── */}
         <button
           className="navbar__mobile-toggle"
           onClick={() => setIsMobileOpen(!isMobileOpen)}

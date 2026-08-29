@@ -1,37 +1,170 @@
 /* ============================================
-   NAVBAR — Ivory, Burgundy & Antique Gold Theme
+   NAVBAR — Single unified bar: Ticker + Nav
    ============================================ */
 
 .navbar {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background-color: rgba(250, 247, 240, 0.96);
+  background-color: rgba(250, 247, 240, 0.97);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(198, 161, 91, 0.3);
+  border-bottom: 1px solid rgba(198, 161, 91, 0.35);
   transition: box-shadow var(--transition-med), background-color var(--transition-med);
 }
 
 .navbar--scrolled {
-  background-color: rgba(250, 247, 240, 0.98);
+  background-color: rgba(250, 247, 240, 0.99);
   box-shadow: 0 4px 24px rgba(53, 21, 27, 0.08);
   border-bottom-color: rgba(198, 161, 91, 0.45);
 }
 
-.navbar__container {
+/* ── Single bar container ── */
+.navbar__bar {
   display: flex;
   align-items: center;
-  justify-content: center;
-  height: 54px;
+  height: 46px;
+  overflow: hidden;
 }
 
-/* ---- Desktop Nav ---- */
+/* ══════════════════════════════════════
+   TICKER — left side
+══════════════════════════════════════ */
+.navbar__ticker {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  overflow: hidden;
+  border-right: 1px solid rgba(198, 161, 91, 0.25);
+}
+
+/* "Latest News" badge */
+.navbar__ticker-label {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 100%;
+  padding: 0 1.5rem 0 1.1rem;
+  background: var(--burgundy-primary);
+  color: var(--bg-ivory);
+  font-family: var(--font-sans);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 50%, calc(100% - 10px) 100%, 0 100%);
+}
+
+.navbar__ticker-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold-antique);
+  flex-shrink: 0;
+  animation: ticker-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes ticker-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.35; transform: scale(0.65); }
+}
+
+/* Scrolling track wrapper */
+.navbar__ticker-track-wrap {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  mask-image: linear-gradient(to right, transparent 0%, black 4%, black 93%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 4%, black 93%, transparent 100%);
+}
+
+/* Scrolling list */
+.navbar__ticker-track {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  animation: ticker-scroll 48s linear infinite;
+  will-change: transform;
+}
+
+.navbar__ticker-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes ticker-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Ticker item */
+.navbar__ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0 0.2rem;
+}
+
+/* Category pill */
+.navbar__ticker-cat {
+  display: inline-block;
+  padding: 1px 7px;
+  border-radius: 20px;
+  background: rgba(198, 161, 91, 0.12);
+  border: 1px solid rgba(198, 161, 91, 0.38);
+  font-family: var(--font-sans);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold-antique);
+  white-space: nowrap;
+}
+
+/* Headline link */
+.navbar__ticker-text {
+  font-family: var(--font-sans);
+  font-size: 0.73rem;
+  font-weight: 500;
+  color: var(--text-main);
+  white-space: nowrap;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.navbar__ticker-text:hover {
+  color: var(--burgundy-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Separator */
+.navbar__ticker-sep {
+  color: var(--gold-antique);
+  font-size: 0.55rem;
+  opacity: 0.55;
+  margin: 0 0.65rem;
+}
+
+/* ══════════════════════════════════════
+   DESKTOP NAV LINKS — right side
+══════════════════════════════════════ */
 .navbar__list {
   display: flex;
   align-items: center;
-  gap: 0.25rem;
+  gap: 0;
   height: 100%;
+  flex-shrink: 0;
+  padding: 0 0.5rem;
 }
 
 .navbar__item {
@@ -44,16 +177,16 @@
 .navbar__link {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  padding: 0 1rem;
+  gap: 3px;
+  padding: 0 0.75rem;
   height: 100%;
   font-family: var(--font-sans);
-  font-size: 0.76rem;
+  font-size: 0.72rem;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
   color: var(--burgundy-primary);
-  opacity: 0.88;
+  opacity: 0.85;
   transition: color var(--transition-fast), opacity var(--transition-fast);
   white-space: nowrap;
   position: relative;
@@ -62,15 +195,14 @@
 .navbar__link::after {
   content: '';
   position: absolute;
-  bottom: 8px;
-  left: 1rem;
-  right: 1rem;
+  bottom: 7px;
+  left: 0.75rem;
+  right: 0.75rem;
   height: 2px;
   background: var(--gold-antique);
   transform: scaleX(0);
   transition: transform var(--transition-med);
   transform-origin: center;
-  box-shadow: 0 0 8px rgba(198, 161, 91, 0.4);
 }
 
 .navbar__item--active .navbar__link,
@@ -86,7 +218,7 @@
 
 .navbar__chevron {
   transition: transform var(--transition-fast);
-  opacity: 0.7;
+  opacity: 0.65;
   color: var(--gold-antique);
 }
 
@@ -94,17 +226,17 @@
   transform: rotate(180deg);
 }
 
-/* ---- Dropdown Submenu ---- */
+/* ── Dropdown ── */
 .navbar__dropdown {
   position: absolute;
   top: calc(100% + 1px);
   left: 50%;
   transform: translateX(-50%) translateY(8px);
-  min-width: 220px;
+  min-width: 210px;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+  transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s;
   z-index: 100;
 }
 
@@ -129,7 +261,7 @@
   display: block;
   padding: 0.6rem 1.25rem;
   font-family: var(--font-sans);
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   font-weight: 500;
   letter-spacing: 0.04em;
   color: var(--text-main);
@@ -146,11 +278,14 @@
   padding-left: 1.5rem;
 }
 
-/* ---- Mobile Toggle ---- */
+/* ══════════════════════════════════════
+   MOBILE TOGGLE — shown on small screens
+══════════════════════════════════════ */
 .navbar__mobile-toggle {
   display: none;
+  flex-shrink: 0;
   color: var(--burgundy-primary);
-  padding: 0.4rem;
+  padding: 0.4rem 0.75rem;
   border-radius: var(--radius-sm);
   transition: background var(--transition-fast);
 }
@@ -159,7 +294,9 @@
   background: rgba(122, 31, 43, 0.08);
 }
 
-/* ---- Mobile Drawer ---- */
+/* ══════════════════════════════════════
+   MOBILE DRAWER
+══════════════════════════════════════ */
 .navbar__mobile {
   display: none;
   position: fixed;
@@ -305,13 +442,10 @@
   border: 1px solid var(--gold-antique);
 }
 
-/* ---- Responsive Breakdown ---- */
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
 @media (max-width: 1080px) {
-  .navbar__container {
-    justify-content: flex-end;
-    height: 54px;
-  }
-
   .navbar__list {
     display: none;
   }
@@ -327,5 +461,25 @@
 
   .navbar__overlay {
     display: block;
+  }
+
+  /* Ticker takes full remaining width on mobile */
+  .navbar__ticker {
+    border-right: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar__bar {
+    height: 42px;
+  }
+
+  .navbar__ticker-label {
+    font-size: 0.58rem;
+    padding: 0 1.3rem 0 0.85rem;
+  }
+
+  .navbar__ticker-text {
+    font-size: 0.7rem;
   }
 }
