@@ -36,8 +36,13 @@ const OurPatronessSection = () => {
             </p>
 
             <div className="patroness__feast-badge">
-              <span className="patroness__feast-label">Annual Feast Day</span>
-              <span className="patroness__feast-date">December 10</span>
+              <div className="patroness__feast-icon-wrap" aria-hidden="true">
+                <Sparkles size={18} className="patroness__feast-icon" />
+              </div>
+              <div className="patroness__feast-info">
+                <span className="patroness__feast-label">Annual Feast Day</span>
+                <span className="patroness__feast-date">December 10</span>
+              </div>
             </div>
 
             <div className="patroness__cta">

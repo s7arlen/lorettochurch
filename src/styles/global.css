@@ -22,6 +22,13 @@
   --cream-soft: #F7F3EB;
   --white: #FFFFFF;
 
+  /* Backward Compatibility Aliases */
+  --brown-primary: var(--burgundy-primary);
+  --brown-deep: var(--burgundy-dark);
+  --brown-muted: var(--text-muted);
+  --cream: var(--cream-secondary);
+  --warm-white: var(--bg-ivory);
+
   /* Borders */
   --border-gold: rgba(198, 161, 91, 0.35);
   --border-burgundy: rgba(122, 31, 43, 0.2);
