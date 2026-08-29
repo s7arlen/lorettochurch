@@ -4,6 +4,7 @@ import Header from './components/layout/Header';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import ScrollToTop from './components/common/ScrollToTop';
+import ScrollUpButton from './components/common/ScrollUpButton';
 
 import HomePage from './pages/HomePage';
 import { OurParishPage, HistoryPage, PatronessPage, DiocesePage } from './pages/AboutPages';
@@ -68,6 +69,7 @@ function App() {
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
         <Footer />
+        <ScrollUpButton />
       </div>
     </Router>
   );
