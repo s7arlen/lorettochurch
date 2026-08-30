@@ -132,6 +132,13 @@
   line-height: 1;
 }
 
+/* Hide heavy site header on desktop so floating glass navbar sits cleanly on hero */
+@media (min-width: 1081px) {
+  .site-header {
+    display: none !important;
+  }
+}
+
 /* Responsive adjustments */
 @media (max-width: 640px) {
   .site-header {

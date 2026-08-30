@@ -106,40 +106,8 @@ export const ParishCouncilPage = () => (
   </main>
 );
 
-export const WardsPage = () => (
-  <main className="inner-page">
-    <section className="page-hero">
-      <div className="page-hero__content container">
-        <span className="page-hero__label">Parish Community</span>
-        <h1 className="page-hero__title">Parish Wards</h1>
-        <div className="page-hero__breadcrumb">
-          <Link to="/">Home</Link> <span>/</span> <span>Parish</span> <span>/</span> <span>Wards</span>
-        </div>
-      </div>
-    </section>
-
-    <section className="section section--cream">
-      <div className="container">
-        <div className="section-heading">
-          <span className="section-heading__label">Small Christian Communities</span>
-          <h2 className="section-heading__title">Our Parish Wards</h2>
-          <p className="section-heading__subtitle">Small Christian Communities (SCC) building local fellowship</p>
-        </div>
-
-        <div className="grid-3">
-          {wards.map((ward) => (
-            <div key={ward.id} style={{ background: 'var(--warm-white)', padding: '1.75rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-gold)', boxShadow: 'var(--shadow-soft)' }}>
-              <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.3rem', color: 'var(--brown-primary)', marginBottom: '0.5rem' }}>{ward.name}</h3>
-              <p style={{ fontSize: '0.85rem', color: 'var(--text-body)', marginBottom: '0.4rem' }}><strong>Area Covered:</strong> {ward.area}</p>
-              <p style={{ fontSize: '0.85rem', color: 'var(--text-body)', marginBottom: '0.4rem' }}><strong>Representative:</strong> {ward.representative}</p>
-              <p style={{ fontSize: '0.85rem', color: 'var(--text-body)' }}><strong>Households:</strong> {ward.households}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  </main>
-);
+import WardsPage from './WardsPage';
+export { WardsPage };
 
 export const ParishOfficePage = () => (
   <main className="inner-page">

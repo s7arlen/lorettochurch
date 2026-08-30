@@ -4,9 +4,21 @@
 
 .hero {
   position: relative;
-  height: clamp(520px, 82vh, 720px);
+  height: clamp(520px, 85vh, 750px);
   overflow: hidden;
   background-color: var(--burgundy-dark);
+}
+
+@media (min-width: 1081px) {
+  .hero {
+    height: 100vh;
+    min-height: 750px;
+  }
+
+  .hero__content-wrapper {
+    padding-top: 90px;
+    padding-bottom: 2rem;
+  }
 }
 
 .hero__swiper {

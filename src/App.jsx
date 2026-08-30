@@ -15,6 +15,7 @@ import { NewsPage, EventsPage, GalleryPage, VideosPage, NewsletterPage } from '.
 import { ContactPage, NotFoundPage } from './pages/ContactPage';
 
 import './styles/global.css';
+import './pages/Organizations.css';
 
 function App() {
   return (
@@ -39,6 +40,9 @@ function App() {
           <Route path="/parish/pastoral-team" element={<PastoralTeamPage />} />
           <Route path="/parish/parish-council" element={<ParishCouncilPage />} />
           <Route path="/parish/wards" element={<WardsPage />} />
+          <Route path="/parish/wards/:slug" element={<WardsPage />} />
+          <Route path="/wards" element={<WardsPage />} />
+          <Route path="/wards/:slug" element={<WardsPage />} />
           <Route path="/parish/office" element={<ParishOfficePage />} />
 
           {/* Faith */}

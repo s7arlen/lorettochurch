@@ -48,6 +48,7 @@ const navItems = [
       { label: 'Altar Servers', path: '/organizations/altar-servers' },
       { label: 'Catechism', path: '/organizations/catechism' },
       { label: 'Legion of Mary', path: '/organizations/legion-of-mary' },
+      { label: 'Eucharistic Ministers', path: '/organizations/eucharistic-ministers' },
     ],
   },
   {
@@ -163,9 +164,19 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* ── ROW 2: Navigation Links (Desktop view only) ── */}
+      {/* ── ROW 2: Navigation Links & Floating Glass Bar (Desktop view only) ── */}
       <div className="navbar__menu-row">
-        <div className="container navbar__menu-container">
+        <div className="navbar__desktop-container">
+          {/* Brand Logo & Title on Far Left */}
+          <Link to="/" className="navbar__brand" aria-label="Our Lady of Loretto Church Home">
+            <img src={logoUrl} alt="Loretto Church Logo" className="navbar__brand-logo" />
+            <div className="navbar__brand-text">
+              <span className="navbar__brand-title">OUR LADY OF LORETTO</span>
+              <span className="navbar__brand-sub">CHURCH, BANTWAL</span>
+            </div>
+          </Link>
+
+          {/* Nav Links in Center/Right */}
           <ul className="navbar__list" role="menubar">
             {navItems.map((item) => (
               <li
@@ -209,6 +220,16 @@ const Navbar = () => {
               </li>
             ))}
           </ul>
+
+          {/* Far Right Action Buttons */}
+          <div className="navbar__actions">
+            <Link to="/faith/mass-timings" className="navbar__action-btn navbar__action-btn--mass">
+              MASS TIMES
+            </Link>
+            <Link to="/contact" className="navbar__action-btn navbar__action-btn--donate">
+              DONATE
+            </Link>
+          </div>
         </div>
       </div>
 
