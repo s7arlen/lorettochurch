@@ -195,10 +195,10 @@
 /* Responsive — Mobile hero redesign (immersive app-style) */
 @media (max-width: 768px) {
   .hero {
-    height: 72vh;
-    height: 72svh;
-    min-height: 470px;
-    max-height: 700px;
+    height: 78vh;
+    height: 78svh;
+    min-height: 510px;
+    max-height: 740px;
     border-radius: 0 0 28px 28px;
   }
 
