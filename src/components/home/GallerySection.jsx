@@ -1,14 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Camera, ArrowRight } from 'lucide-react';
 import { galleryImages } from '../../data/gallery';
 import AccordionGallery from '../common/AccordionGallery';
-import Lightbox from '../common/Lightbox';
+import GalleryStack from './GalleryStack';
 import './GallerySection.css';
 
 const GallerySection = () => {
-  const [lightboxIndex, setLightboxIndex] = useState(null);
-
   // Take top 6 images for the interactive accordion
   const previewImages = galleryImages.slice(0, 6);
 
@@ -17,20 +15,6 @@ const GallerySection = () => {
     label: img.title,
     alt: img.alt,
   }));
-
-  const handleItemClick = (index) => {
-    setLightboxIndex(index);
-  };
-
-  const handleCloseLightbox = () => setLightboxIndex(null);
-  const handlePrev = () =>
-    setLightboxIndex((prev) =>
-      prev > 0 ? prev - 1 : previewImages.length - 1
-    );
-  const handleNext = () =>
-    setLightboxIndex((prev) =>
-      prev < previewImages.length - 1 ? prev + 1 : 0
-    );
 
   return (
     <section className="gallery-section section section--white" aria-label="Photo Gallery">
@@ -42,6 +26,9 @@ const GallerySection = () => {
             Capturing sacred moments of prayer, liturgical celebrations, and community fellowship
           </p>
         </div>
+
+        {/* Mobile-only stacked photo gallery (hidden on desktop via CSS) */}
+        <GalleryStack images={previewImages} />
 
         {/* Interactive Accordion Gallery */}
         <div className="gallery-section__accordion-wrap">
@@ -61,7 +48,6 @@ const GallerySection = () => {
             parallax={0.6}
             tilt={6}
             duration={0.65}
-            onItemClick={handleItemClick}
           />
         </div>
 
@@ -71,15 +57,6 @@ const GallerySection = () => {
             <ArrowRight size={16} aria-hidden="true" />
           </Link>
         </div>
-
-        {/* Lightbox Modal */}
-        <Lightbox
-          isOpen={lightboxIndex !== null}
-          image={lightboxIndex !== null ? previewImages[lightboxIndex] : null}
-          onClose={handleCloseLightbox}
-          onPrev={handlePrev}
-          onNext={handleNext}
-        />
       </div>
     </section>
   );

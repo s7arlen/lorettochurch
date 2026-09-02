@@ -1,18 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Users, HeartHandshake, Music, Shield, BookOpen, UsersRound, ArrowRight } from 'lucide-react';
+import { Users, HeartHandshake, Music, Shield, BookOpen, UsersRound, Trophy, HandHeart, ArrowRight } from 'lucide-react';
 import { ministries } from '../../data/ministries';
 import './ParishOrganizationsSection.css';
 
 // Map icons to ministries
 const ministryIcons = {
-  'youth-ministry': Users,
-  'womens-association': HeartHandshake,
-  'mens-association': UsersRound,
+  icym: Users,
+  ycs: BookOpen,
+  'catholic-sabha': UsersRound,
+  'stree-sanghatan': HeartHandshake,
+  'sports-club': Trophy,
   'parish-choir': Music,
   'altar-servers': Shield,
-  'catechism': BookOpen,
+  'eucharistic-ministers': HandHeart,
+  'franciscan-third-order': HeartHandshake,
 };
 
 const ParishOrganizationsSection = () => {
@@ -20,15 +23,15 @@ const ParishOrganizationsSection = () => {
     <section className="organizations section section--cream" aria-label="Community Ministries and Organizations">
       <div className="container">
         <div className="section-heading">
-          <span className="section-heading__label">Fellowship & Service</span>
-          <h2 className="section-heading__title">Community & Ministries</h2>
+          <span className="section-heading__label">Parish Life</span>
+          <h2 className="section-heading__title">Associations</h2>
           <p className="section-heading__subtitle">
-            Active associations fostering faith, spiritual growth, and dedicated service in our parish family
+            Groups that bring our parish family together in faith and service
           </p>
         </div>
 
         <div className="organizations__grid">
-          {ministries.slice(0, 6).map((org, index) => {
+          {ministries.map((org, index) => {
             const Icon = ministryIcons[org.slug] || Users;
             return (
               <motion.div
@@ -44,9 +47,8 @@ const ParishOrganizationsSection = () => {
                   </div>
                   <div className="org-minimal-card__content">
                     <h3 className="org-minimal-card__title">{org.name}</h3>
-                    <p className="org-minimal-card__desc">{org.description}</p>
                     <span className="org-minimal-card__link">
-                      Explore Ministry <ArrowRight size={14} className="org-minimal-card__arrow" />
+                      View association <ArrowRight size={14} className="org-minimal-card__arrow" />
                     </span>
                   </div>
                   <div className="org-minimal-card__gold-accent" aria-hidden="true" />

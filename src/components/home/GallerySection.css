@@ -25,4 +25,12 @@
   .gallery-section__accordion-wrap {
     margin-bottom: 2.5rem;
   }
+
+  /* Mobile Stack Reveal — hide the desktop accordion, shared heading and CTA
+     (the GalleryStack component renders its own mobile versions) */
+  .gallery-section .section-heading,
+  .gallery-section__accordion-wrap,
+  .gallery-section__cta {
+    display: none;
+  }
 }

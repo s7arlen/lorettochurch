@@ -1,5 +1,5 @@
 // Parish Organizations & Associations Data (Alike Thodambila Church Reference)
-export const ministries = [
+const allMinistries = [
   {
     id: 1,
     name: 'Catholic Sabha',
@@ -857,3 +857,62 @@ export const ministries = [
   }
 ];
 
+const sportsClub = {
+  id: 12,
+  name: 'Sports Club',
+  shortName: 'Sports Club',
+  slug: 'sports-club',
+  category: 'Parish Associations',
+  description: 'Bringing parishioners together through sports, fellowship, and healthy recreation.',
+  fullDescription: 'The Parish Sports Club encourages participation, teamwork, and fellowship through sporting activities for parishioners of all ages.',
+  targetGroup: 'Parishioners of all ages',
+  activities: ['Parish sports meets', 'Friendly tournaments', 'Youth and community recreation']
+};
+
+const requestedAssociationSlugs = [
+  'icym',
+  'ycs',
+  'catholic-sabha',
+  'stree-sanghatan',
+  'sports-club',
+  'parish-choir',
+  'altar-servers',
+  'eucharistic-ministers',
+  'franciscan-third-order'
+];
+
+const associationsBySlug = new Map([
+  ...allMinistries,
+  sportsClub
+].map((association) => [association.slug, association]));
+
+// Keep the public associations list focused on the nine parish groups requested.
+export const ministries = requestedAssociationSlugs.map((slug) => {
+  const association = associationsBySlug.get(slug);
+
+  if (slug === 'icym') {
+    return { ...association, name: 'ICYM — Indian Catholic Youth Movement' };
+  }
+
+  if (slug === 'ycs') {
+    return { ...association, name: 'YCS — Young Christian Students' };
+  }
+
+  if (slug === 'stree-sanghatan') {
+    return { ...association, name: "Sthree Sanghatan — Women's Association" };
+  }
+
+  if (slug === 'parish-choir') {
+    return { ...association, name: 'Choir Group' };
+  }
+
+  if (slug === 'eucharistic-ministers') {
+    return { ...association, name: 'Extraordinary Ministers' };
+  }
+
+  if (slug === 'franciscan-third-order') {
+    return { ...association, name: 'Franciscan Third Order' };
+  }
+
+  return association;
+});
