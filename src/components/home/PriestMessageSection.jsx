@@ -19,14 +19,14 @@ const PriestMessageSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <div className="priest-message__circle-frame">
+            <div className="priest-message__portrait-frame">
               <div
                 className="priest-message__photo"
                 style={{ backgroundImage: `url(${parishPriest.image})` }}
                 role="img"
                 aria-label={`Photo of ${parishPriest.designation} ${parishPriest.name}`}
               />
-              <div className="priest-message__ring" aria-hidden="true" />
+              <div className="priest-message__portrait-accent" aria-hidden="true" />
             </div>
             <div className="priest-message__name-tag">
               <span className="priest-message__desig">{parishPriest.designation}</span>

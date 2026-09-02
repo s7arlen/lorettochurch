@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Sparkles, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import './OurPatronessSection.css';
 
 const OurPatronessSection = () => {
@@ -20,10 +20,8 @@ const OurPatronessSection = () => {
               Patroness of Our Parish
             </span>
             <h2 className="patroness__title">Our Lady of Loretto</h2>
-            <div className="patroness__gold-line" aria-hidden="true" />
             
             <blockquote className="patroness__quote">
-              <Sparkles size={18} className="patroness__quote-icon" />
               <span>"OUR LADY OF LORETTO, PRAY FOR US."</span>
             </blockquote>
 
@@ -36,9 +34,6 @@ const OurPatronessSection = () => {
             </p>
 
             <div className="patroness__feast-badge">
-              <div className="patroness__feast-icon-wrap" aria-hidden="true">
-                <Sparkles size={18} className="patroness__feast-icon" />
-              </div>
               <div className="patroness__feast-info">
                 <span className="patroness__feast-label">Annual Feast Day</span>
                 <span className="patroness__feast-date">December 10</span>
@@ -60,12 +55,6 @@ const OurPatronessSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
           >
-            <div className="patroness__gold-frame" aria-hidden="true">
-              <div className="patroness__gold-frame-corner top-left" />
-              <div className="patroness__gold-frame-corner top-right" />
-              <div className="patroness__gold-frame-corner bottom-left" />
-              <div className="patroness__gold-frame-corner bottom-right" />
-            </div>
             <img
               src={`${import.meta.env.BASE_URL}images/patroness-mary.jpg`}
               alt="Our Lady of Loretto Statue and Marian Devotion"
