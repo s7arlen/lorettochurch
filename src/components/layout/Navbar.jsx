@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+﻿import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { news } from '../../data/news';
@@ -23,20 +23,10 @@ const navItems = [
       { label: 'Parish Priest', path: '/parish/parish-priest' },
       { label: 'Pastoral Team', path: '/parish/pastoral-team' },
       { label: 'Parish Council', path: '/parish/parish-council' },
-      { label: 'Wards', path: '/parish/wards' },
       { label: 'Parish Office', path: '/parish/office' },
     ],
   },
-  {
-    label: 'Faith',
-    path: '/faith',
-    dropdown: [
-      { label: 'Mass Timings', path: '/faith/mass-timings' },
-      { label: 'Sacraments', path: '/faith/sacraments' },
-      { label: 'Catechism', path: '/faith/catechism' },
-      { label: 'Prayer', path: '/faith/prayer' },
-    ],
-  },
+  { label: 'Wards', path: '/wards' },
   {
     label: 'Organizations',
     path: '/organizations',
@@ -211,6 +201,7 @@ const Navbar = () => {
                           to={sub.path}
                           className="navbar__dropdown-link"
                           role="menuitem"
+                          onClick={() => setOpenDropdown(null)}
                         >
                           {sub.label}
                         </Link>

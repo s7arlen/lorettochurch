@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { motion } from 'framer-motion';
 import { leadership } from '../../data/leadership';
 import './ParishLeadershipSection.css';
@@ -10,7 +10,6 @@ const ParishLeadershipSection = () => {
     <section className="leadership section section--cream" aria-label="Parish Leadership">
       <div className="container">
         <div className="section-heading">
-          <span className="section-heading__label">Shepherds & Servants</span>
           <h2 className="section-heading__title">Parish Leadership</h2>
           <p className="section-heading__subtitle">
             Dedicated pastoral team and council members serving Our Lady of Loretto Parish

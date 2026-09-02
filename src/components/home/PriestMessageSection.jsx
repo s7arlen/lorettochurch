@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Quote, ArrowRight } from 'lucide-react';
@@ -42,7 +42,6 @@ const PriestMessageSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.15 }}
           >
-            <span className="section-heading__label">Pastoral Greeting</span>
             <h2 className="priest-message__heading">Message from Our Parish Priest</h2>
             <div className="priest-message__divider" aria-hidden="true" />
             

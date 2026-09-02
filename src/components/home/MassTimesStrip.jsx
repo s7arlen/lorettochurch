@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Link } from 'react-router-dom';
 import { Clock, ArrowRight } from 'lucide-react';
 import { massTimes } from '../../data/massTimes';
@@ -10,7 +10,7 @@ const MassTimesStrip = () => {
       <div className="container mass-strip__inner">
         <div className="mass-strip__label">
           <Clock size={14} aria-hidden="true" />
-          <span>Sunday Masses</span>
+          <span>Mass Timings</span>
         </div>
 
         <ul className="mass-strip__times" role="list">

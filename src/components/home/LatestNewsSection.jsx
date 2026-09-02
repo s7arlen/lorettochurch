@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Calendar, ArrowRight, Bell } from 'lucide-react';
@@ -10,7 +10,6 @@ const LatestNewsSection = () => {
     <section className="latest-news section section--cream" aria-label="Latest News & Announcements">
       <div className="container">
         <div className="section-heading">
-          <span className="section-heading__label">Announcements & Updates</span>
           <h2 className="section-heading__title">News & Announcements</h2>
           <p className="section-heading__subtitle">
             Stay informed with current events, parish notices, and pastoral updates

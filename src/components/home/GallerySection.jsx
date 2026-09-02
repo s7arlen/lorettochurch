@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Link } from 'react-router-dom';
 import { Camera, ArrowRight } from 'lucide-react';
 import { galleryImages } from '../../data/gallery';
@@ -20,7 +20,6 @@ const GallerySection = () => {
     <section className="gallery-section section section--white" aria-label="Photo Gallery">
       <div className="container">
         <div className="section-heading">
-          <span className="section-heading__label">Visual Heritage</span>
           <h2 className="section-heading__title">Photo Gallery</h2>
           <p className="section-heading__subtitle">
             Capturing sacred moments of prayer, liturgical celebrations, and community fellowship

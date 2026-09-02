@@ -117,13 +117,40 @@
   flex-direction: column;
   gap: 0.75rem;
   box-shadow: var(--shadow-soft);
-  transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.ward-hub-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold-antique), #d3413f, var(--gold-antique));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.ward-hub-card:hover::before {
+  opacity: 1;
 }
 
 .ward-hub-card:hover {
-  transform: translateY(-3px);
   border-color: var(--gold-antique);
-  box-shadow: var(--shadow-med);
+  background: #ffffff;
+  box-shadow: 0 12px 28px rgba(60, 24, 16, 0.1), 0 2px 8px rgba(184, 134, 11, 0.15);
+}
+
+.ward-hub-card:hover .ward-hub-card__konkani {
+  color: var(--brown-primary);
+}
+
+.ward-hub-card:hover .ward-hub-card__link svg {
+  transform: translateX(4px);
+  transition: transform 0.25s ease;
 }
 
 .ward-hub-card__top {

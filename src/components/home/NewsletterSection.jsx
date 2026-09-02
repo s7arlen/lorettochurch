@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { FileText, Download, Eye } from 'lucide-react';
 import { newsletters } from '../../data/newsletter';
 import './NewsletterSection.css';
@@ -12,7 +12,6 @@ const NewsletterSection = () => {
     <section className="newsletter section section--white" aria-label="Parish Newsletter">
       <div className="container">
         <div className="section-heading">
-          <span className="section-heading__label">Official Publication</span>
           <h2 className="section-heading__title">Parish Newsletter</h2>
           <p className="section-heading__subtitle">
             Read the monthly voices, news and reflections of Our Lady of Loretto Parish

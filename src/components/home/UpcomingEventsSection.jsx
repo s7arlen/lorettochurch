@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { MapPin, Clock, ArrowRight, Calendar } from 'lucide-react';
@@ -10,7 +10,6 @@ const UpcomingEventsSection = () => {
     <section className="upcoming-events section section--white" aria-label="Upcoming Events">
       <div className="container">
         <div className="section-heading">
-          <span className="section-heading__label">Calendar of Faith</span>
           <h2 className="section-heading__title">Events & Parish Life</h2>
           <p className="section-heading__subtitle">
             Gather with our parish community for spiritual celebrations, feast days, and ministry gatherings

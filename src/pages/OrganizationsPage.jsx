@@ -1,5 +1,6 @@
-import React, { useState, useMemo } from 'react';
+﻿import React, { useState, useMemo } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   Search,
   X,
@@ -21,6 +22,28 @@ import {
 } from 'lucide-react';
 import { ministries } from '../data/ministries';
 import './Organizations.css';
+
+// Animation variants for smooth stagger & card transitions
+const containerVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.05,
+      delayChildren: 0.05,
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 24, scale: 0.96 },
+  show: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
+  },
+};
 
 // Subcomponent: Image with graceful fallback placeholder
 const OrgCardImage = ({ src, alt, category }) => {
@@ -84,7 +107,7 @@ const BearerAvatar = ({ photo, name, role }) => {
   );
 };
 
-// Subcomponent: Organizations List & Grid View (All Associations)
+// Subcomponent: Organizations List & Grid View (All Associations - Minimal Thodambila Layout)
 const OrganizationsList = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -116,117 +139,129 @@ const OrganizationsList = () => {
   }, [searchQuery, selectedCategory]);
 
   return (
-    <div>
-      <div className="section-heading">
-        <span className="section-heading__label">ಸಂಘಟನಾಂ • Associations & Ministries</span>
-        <h2 className="section-heading__title">Parish Organizations</h2>
-        <p className="section-heading__subtitle">
-          Discover associations serving our parish family, nurturing faith, and extending compassionate service
-        </p>
-      </div>
-
-      {/* Controls: Search and Category Filter */}
-      <div className="org-controls">
-        <div className="org-controls__top">
-          <div className="org-search">
-            <Search size={18} className="org-search__icon" />
-            <input
-              type="text"
-              className="org-search__input"
-              placeholder="Search associations, office bearers, activities..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              aria-label="Search organizations"
-            />
-            {searchQuery && (
-              <button
-                className="org-search__clear"
-                onClick={() => setSearchQuery('')}
-                aria-label="Clear search"
-              >
-                <X size={16} />
-              </button>
-            )}
-          </div>
-          <span className="org-count">
-            Showing {filteredMinistries.length} of {ministries.length} associations
-          </span>
+    <div className="org-hub-minimal-wrapper">
+      {/* Stats Counter Pill */}
+      <motion.div
+        className="org-hub-minimal-header"
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4 }}
+      >
+        <div className="org-hub-minimal-pill">
+          <span>{ministries.length} Active Parish Associations</span>
         </div>
+      </motion.div>
 
-        {/* Categories Tabs */}
-        <ul className="org-categories" role="tablist">
-          {categories.map((cat) => (
-            <li key={cat} role="presentation">
-              <button
-                type="button"
-                role="tab"
-                aria-selected={selectedCategory === cat}
-                className={`org-category-btn ${
-                  selectedCategory === cat ? 'org-category-btn--active' : ''
-                }`}
-                onClick={() => setSelectedCategory(cat)}
-              >
-                {cat}
-              </button>
-            </li>
-          ))}
-        </ul>
+      {/* 2. Simple Centered Search */}
+      <motion.div
+        className="org-hub-search-box"
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: 0.2 }}
+      >
+        <Search size={16} className="org-hub-search-icon" />
+        <input
+          type="text"
+          className="org-hub-search-input"
+          placeholder="Search association name, office bearers..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          aria-label="Search associations"
+        />
+        {searchQuery && (
+          <button
+            className="org-search__clear"
+            onClick={() => setSearchQuery('')}
+            aria-label="Clear search"
+          >
+            <X size={15} />
+          </button>
+        )}
+      </motion.div>
+
+      {/* 3. Category Filter Pills */}
+      <div className="org-hub-categories">
+        {categories.map((cat) => (
+          <button
+            key={cat}
+            type="button"
+            className={`org-category-pill ${selectedCategory === cat ? 'org-category-pill--active' : ''}`}
+            onClick={() => setSelectedCategory(cat)}
+          >
+            {cat}
+          </button>
+        ))}
       </div>
 
-      {/* Grid of Cards */}
+      {/* 4. Minimal Ward-Style Cards Grid */}
       {filteredMinistries.length > 0 ? (
-        <div className="org-grid">
+        <motion.div
+          className="org-hub-grid"
+          variants={containerVariants}
+          initial="hidden"
+          animate="show"
+          key={`${searchQuery}-${selectedCategory}`}
+        >
           {filteredMinistries.map((org) => (
-            <Link
+            <motion.div
               key={org.id}
-              to={`/organizations/${org.slug}`}
-              className="org-card"
-              aria-label={`View details of ${org.name}`}
+              variants={cardVariants}
+              whileHover={{ y: -6, scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ duration: 0.25, ease: 'easeOut' }}
             >
-              <div className="org-card__image-wrap">
-                <OrgCardImage src={org.image} alt={org.name} category={org.category} />
-                {org.category && (
-                  <span className="org-card__badge">{org.category}</span>
-                )}
-              </div>
-
-              <div className="org-card__body">
-                {org.konkaniName && (
-                  <span className="org-card__eyebrow">{org.konkaniName}</span>
-                )}
-                <h3 className="org-card__title">{org.name}</h3>
-                <p className="org-card__desc">{org.description}</p>
-
-                <div className="org-card__footer">
-                  {org.meetingDay ? (
-                    <span className="org-card__meta-pill" title={org.meetingDay}>
-                      <Clock size={13} />
-                      <span>{org.meetingDay.split(' at ')[0].replace('after Morning Mass', '').replace('after 7:30 AM Mass', '')}</span>
-                    </span>
-                  ) : (
-                    <span className="org-card__meta-pill">
-                      <Users size={13} />
-                      <span>Active Committee</span>
-                    </span>
+              <Link
+                to={`/organizations/${org.slug}`}
+                className="org-hub-card"
+                aria-label={`View details of ${org.name}`}
+              >
+                <div className="org-hub-card__top">
+                  {org.konkaniName && (
+                    <h3 className="org-hub-card__konkani">{org.konkaniName}</h3>
                   )}
-                  <span className="org-card__link">
+                  <span className="org-hub-card__english">{org.name}</span>
+                </div>
+
+                <div className="org-hub-card__info">
+                  <p className="org-hub-card__desc">{org.description}</p>
+
+                  {org.meetingDay && (
+                    <div className="org-hub-card__row">
+                      <span className="org-hub-card__label">ಜಮಾತ್ (Meeting):</span>
+                      <span className="org-hub-card__val">
+                        {org.meetingDay.split(' at ')[0].replace('after Morning Mass', '').replace('after 7:30 AM Mass', '')}
+                      </span>
+                    </div>
+                  )}
+                </div>
+
+                <div className="org-hub-card__footer">
+                  <span className="org-hub-card__badge">{org.category || 'Association'}</span>
+                  <span className="org-hub-card__link">
                     <span>View Details</span>
-                    <ArrowRight size={13} className="org-card__arrow" />
+                    <ArrowRight size={13} />
                   </span>
                 </div>
-              </div>
-            </Link>
+              </Link>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       ) : (
-        <div className="org-empty">
-          <ShieldAlert size={44} className="org-empty__icon" />
-          <h3 className="org-empty__title">No Associations Found</h3>
-          <p className="org-empty__desc">
+        <motion.div
+          className="org-empty"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          style={{ padding: '2.5rem 1rem' }}
+        >
+          <ShieldAlert size={36} className="org-empty__icon" />
+          <h4 style={{ fontFamily: 'var(--font-serif)', color: 'var(--brown-primary)' }}>
+            No Associations Found
+          </h4>
+          <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)' }}>
             We couldn't find any associations matching your search "{searchQuery}".
           </p>
           <button
-            className="btn btn--primary"
+            className="btn btn--outline"
             onClick={() => {
               setSearchQuery('');
               setSelectedCategory('All');
@@ -234,269 +269,171 @@ const OrganizationsList = () => {
           >
             Reset Filters
           </button>
-        </div>
+        </motion.div>
       )}
     </div>
   );
 };
 
-// Subcomponent: Detailed Single Association View (Thodambila Aligned)
+// Subcomponent: Detailed Single Association View (Minimal Thodambila Aligned)
 const OrganizationDetail = ({ org }) => {
   const currentIndex = ministries.findIndex((m) => m.slug === org.slug);
   const prevOrg = currentIndex > 0 ? ministries[currentIndex - 1] : null;
   const nextOrg = currentIndex < ministries.length - 1 ? ministries[currentIndex + 1] : null;
 
   return (
-    <div className="org-detail-container">
-      <div className="org-detail-layout">
-        {/* Main Content Area */}
-        <div className="org-detail-main">
-          {/* Main Association Banner */}
-          <div className="org-detail-banner">
-            <OrgCardImage src={org.image} alt={org.name} category={org.category} />
-          </div>
+    <div className="org-minimal-wrapper">
+      {/* 1. Clean Title Header */}
+      <motion.div
+        className="org-minimal-header"
+        initial={{ opacity: 0, y: -15 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        {org.konkaniName && (
+          <h1 className="org-minimal-title-konkani">{org.konkaniName}</h1>
+        )}
+        <h2 className="org-minimal-title-english">{org.name}</h2>
 
-          {/* Motto Banner */}
-          {org.motto && (
-            <div className="org-motto-banner">
-              <span className="org-motto-banner__label">ಧ್ಯೇಯ್ • Motto</span>
-              <p className="org-motto-banner__text">"{org.motto}"</p>
-            </div>
+        <div className="org-minimal-meta-strip">
+          {org.category && (
+            <span className="org-minimal-meta-item">
+              <Sparkles size={14} className="org-minimal-meta-icon" />
+              <span>{org.category}</span>
+            </span>
           )}
-
-          {/* 1. Office Bearers Section (ಹುದ್ದೆದಾರ್) */}
-          <div className="org-detail-section">
-            <h2 className="org-detail-section__title">
-              <Award size={22} />
-              <span>ಹುದ್ದೆದಾರ್ • Office Bearers & Committee</span>
-            </h2>
-            <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', marginBottom: '1rem' }}>
-              Executive leaders serving our {org.shortName || org.name} unit.
-            </p>
-
-            {org.officeBearers && org.officeBearers.length > 0 ? (
-              <div className="org-bearers-grid">
-                {org.officeBearers.map((bearer, idx) => (
-                  <div key={idx} className="org-bearer-card">
-                    <div className="org-bearer-avatar">
-                      <BearerAvatar photo={bearer.photo} name={bearer.name} role={bearer.role} />
-                    </div>
-
-                    <span
-                      className={`org-bearer-role ${
-                        bearer.role?.includes('Director') ? 'org-bearer-role--director' : ''
-                      }`}
-                    >
-                      {bearer.role}
-                    </span>
-
-                    {bearer.konkaniRole && (
-                      <span className="org-bearer-konkani-role">{bearer.konkaniRole}</span>
-                    )}
-
-                    <h4 className="org-bearer-name">{bearer.name}</h4>
-
-                    {bearer.ward && <span className="org-bearer-ward">{bearer.ward}</span>}
-
-                    {bearer.phone && (
-                      <a
-                        href={`tel:${bearer.phone.replace(/\s+/g, '')}`}
-                        className="org-bearer-phone"
-                        title={`Call ${bearer.name}`}
-                      >
-                        <Phone size={12} />
-                        <span>{bearer.phone}</span>
-                      </a>
-                    )}
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>
-                Office bearers list will be updated soon.
-              </p>
-            )}
-          </div>
-
-          {/* 2. About Section (ಪರಿಚಯ್) */}
-          <div className="org-detail-section">
-            <h3 className="org-detail-section__title">
-              <BookOpen size={20} />
-              <span>ಪರಿಚಯ್ • About {org.shortName || org.name}</span>
-            </h3>
-            <p className="org-detail-lead">
-              {org.fullDescription || org.description}
-            </p>
-          </div>
-
-          {/* 3. Objectives Section (ಉದ್ದೇಶಾಂ) */}
-          {org.objectives && org.objectives.length > 0 && (
-            <div className="org-detail-section">
-              <h3 className="org-detail-section__title">
-                <HeartHandshake size={20} />
-                <span>ಉದ್ದೇಶಾಂ • Aims & Objectives</span>
-              </h3>
-              <ul className="org-feature-list">
-                {org.objectives.map((obj, idx) => (
-                  <li key={idx} className="org-feature-item">
-                    <span className="org-feature-bullet">✓</span>
-                    <span>{obj}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          {org.meetingDay && (
+            <>
+              <span className="org-minimal-meta-sep">•</span>
+              <span className="org-minimal-meta-item">
+                <Clock size={14} className="org-minimal-meta-icon" />
+                <span>{org.meetingDay}</span>
+              </span>
+            </>
           )}
-
-          {/* 4. Activities Section (ಮುಖೆಲ್ ಕಾರ್ಯಕ್ರಮಾಂ) */}
-          {org.activities && org.activities.length > 0 && (
-            <div className="org-detail-section">
-              <h3 className="org-detail-section__title">
-                <CheckCircle2 size={20} />
-                <span>ಕಾರ್ಯಕ್ರಮಾಂ • Key Activities & Initiatives</span>
-              </h3>
-              <ul className="org-feature-list">
-                {org.activities.map((act, idx) => (
-                  <li key={idx} className="org-feature-item">
-                    <span className="org-feature-bullet">{idx + 1}</span>
-                    <span>{act}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-
-          {/* 5. How to Join Section (ಸದಸ್ಯತ್ವ್) */}
-          {org.howToJoin && (
-            <div className="org-join-card">
-              <h3 className="org-join-card__title">ಸದಸ್ಯತ್ವ್ • Membership & Joining Information</h3>
-              <p className="org-join-card__desc">{org.howToJoin}</p>
-              <div className="org-join-actions">
-                <Link to="/contact" className="btn btn--primary">
-                  Contact Parish Office
-                </Link>
-                {org.officeBearers?.[0]?.phone && (
-                  <a
-                    href={`tel:${org.officeBearers[0].phone.replace(/\s+/g, '')}`}
-                    className="btn btn--outline"
-                  >
-                    Contact Coordinator
-                  </a>
-                )}
-              </div>
-            </div>
+          {org.venue && (
+            <>
+              <span className="org-minimal-meta-sep">•</span>
+              <span className="org-minimal-meta-item">
+                <MapPin size={14} className="org-minimal-meta-icon" />
+                <span>{org.venue}</span>
+              </span>
+            </>
           )}
         </div>
 
-        {/* Sidebar Information Card */}
-        <aside className="org-detail-sidebar">
-          {/* Quick Facts Card */}
-          <div className="org-facts-card">
-            <div className="org-facts-card__header">
-              <Calendar size={18} />
-              <h3>ಜಮಾತ್ • Meeting & Details</h3>
-            </div>
-            <div className="org-facts-card__body">
-              {org.meetingDay && (
-                <div className="org-fact-item">
-                  <Clock size={18} className="org-fact-icon" />
-                  <div className="org-fact-content">
-                    <h4>Meeting Schedule / ಜಮಾತ್</h4>
-                    <p>{org.meetingDay}</p>
-                  </div>
-                </div>
-              )}
+        {/* Motto */}
+        {org.motto && (
+          <p className="org-minimal-motto">"{org.motto}"</p>
+        )}
+      </motion.div>
 
-              {org.venue && (
-                <div className="org-fact-item">
-                  <MapPin size={18} className="org-fact-icon" />
-                  <div className="org-fact-content">
-                    <h4>Gathering Place / ಜಾಗೊ</h4>
-                    <p>{org.venue}</p>
-                  </div>
-                </div>
-              )}
+      {/* 2. Office Bearers Section (ಹುದ್ದೆದಾರ್ - Clean Cards Grid) */}
+      <motion.div
+        className="org-minimal-section"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.1 }}
+      >
+        <h3 className="org-minimal-section-title">
+          <Award size={18} />
+          <span>ಹುದ್ದೆದಾರ್ • Office Bearers & Committee</span>
+        </h3>
 
-              {org.targetGroup && (
-                <div className="org-fact-item">
-                  <Users size={18} className="org-fact-icon" />
-                  <div className="org-fact-content">
-                    <h4>Eligibility / ಅರ್ಹತಾ</h4>
-                    <p>{org.targetGroup}</p>
-                  </div>
+        {org.officeBearers && org.officeBearers.length > 0 ? (
+          <motion.div
+            className="org-minimal-bearers-grid"
+            variants={containerVariants}
+            initial="hidden"
+            animate="show"
+          >
+            {org.officeBearers.map((bearer, idx) => (
+              <motion.div
+                key={idx}
+                className="org-minimal-bearer-card"
+                variants={cardVariants}
+                whileHover={{ y: -5, scale: 1.02 }}
+                transition={{ duration: 0.25 }}
+              >
+                <div className="org-minimal-avatar">
+                  <BearerAvatar photo={bearer.photo} name={bearer.name} role={bearer.role} />
                 </div>
-              )}
+                <h4 className="org-minimal-bearer-konkani-name">
+                  {bearer.konkaniName || bearer.name}
+                </h4>
+                <p className="org-minimal-bearer-eng-name">{bearer.name}</p>
+                <span
+                  className={`org-minimal-role-badge ${
+                    bearer.role?.includes('Director') || bearer.role?.includes('Priest')
+                      ? 'org-minimal-role-badge--director'
+                      : ''
+                  }`}
+                >
+                  {bearer.konkaniRole || bearer.role}
+                </span>
 
-              {org.spiritualDirector && (
-                <div className="org-fact-item">
-                  <Sparkles size={18} className="org-fact-icon" />
-                  <div className="org-fact-content">
-                    <h4>Spiritual Director / ನಿರ್ದೇಶಕ್</h4>
-                    <p>{org.spiritualDirector}</p>
-                  </div>
-                </div>
-              )}
-
-              {org.officeBearers?.[1]?.name && (
-                <div className="org-fact-item">
-                  <UserCheck size={18} className="org-fact-icon" />
-                  <div className="org-fact-content">
-                    <h4>{org.officeBearers[1].role} / {org.officeBearers[1].konkaniRole}</h4>
-                    <p>{org.officeBearers[1].name}</p>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* Quick Navigation to Other Organizations (All 11) */}
-          <div className="org-sidebar-nav">
-            <h4 className="org-sidebar-nav__title">ಸರ್ವ್ ಸಂಘಟನಾಂ • All Associations</h4>
-            <ul className="org-sidebar-nav__list">
-              {ministries.map((m) => (
-                <li key={m.id}>
-                  <Link
-                    to={`/organizations/${m.slug}`}
-                    className={`org-sidebar-nav__link ${
-                      m.slug === org.slug ? 'org-sidebar-nav__link--active' : ''
-                    }`}
+                {bearer.phone && (
+                  <a
+                    href={`tel:${bearer.phone.replace(/\s+/g, '')}`}
+                    className="org-minimal-phone-btn"
+                    title={`Call ${bearer.name}`}
                   >
-                    <span>
-                      {m.konkaniName ? `${m.konkaniName} (${m.shortName || m.name})` : m.shortName || m.name}
-                    </span>
-                    <ArrowRight size={13} />
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </aside>
-      </div>
+                    <Phone size={12} />
+                    <span>{bearer.phone}</span>
+                  </a>
+                )}
+              </motion.div>
+            ))}
+          </motion.div>
+        ) : (
+          <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', textAlign: 'center' }}>
+            Office bearers list will be updated soon.
+          </p>
+        )}
+      </motion.div>
 
-      {/* Detail Bottom Navigation */}
-      <div className="org-detail-bottom-nav">
-        <Link to="/organizations" className="btn btn--outline">
+      {/* 3. Brief About / Overview Section */}
+      <motion.div
+        className="org-minimal-card-section"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.45, delay: 0.15 }}
+      >
+        <h3 className="org-minimal-section-title">
+          <BookOpen size={18} />
+          <span>ಪರಿಚಯ್ • About {org.shortName || org.name}</span>
+        </h3>
+        <p className="org-minimal-about-text">
+          {org.fullDescription || org.description}
+        </p>
+      </motion.div>
+
+      {/* 4. Bottom Navigation */}
+      <div className="org-minimal-bottom-nav">
+        <Link to="/organizations" className="org-minimal-back-link">
           <ArrowLeft size={16} />
-          <span>Back to All Organizations / ಸಂಘಟನಾಂ</span>
+          <span>Back to All Associations (ಸಂಘಟನಾಂ)</span>
         </Link>
 
-        <div className="org-prev-next">
+        <div className="org-minimal-prev-next">
           {prevOrg && (
             <Link
               to={`/organizations/${prevOrg.slug}`}
-              className="org-nav-pill"
+              className="org-minimal-nav-btn"
               title={prevOrg.name}
             >
               <ArrowLeft size={14} />
-              <span>Prev: {prevOrg.shortName || prevOrg.name}</span>
+              <span>{prevOrg.shortName || prevOrg.name}</span>
             </Link>
           )}
           {nextOrg && (
             <Link
               to={`/organizations/${nextOrg.slug}`}
-              className="org-nav-pill"
+              className="org-minimal-nav-btn"
               title={nextOrg.name}
             >
-              <span>Next: {nextOrg.shortName || nextOrg.name}</span>
+              <span>{nextOrg.shortName || nextOrg.name}</span>
               <ArrowRight size={14} />
             </Link>
           )}
@@ -516,11 +453,6 @@ const OrganizationsPage = () => {
       {/* Dynamic Page Hero */}
       <section className="page-hero">
         <div className="page-hero__content container">
-          <span className="page-hero__label">
-            {selectedOrg
-              ? `${selectedOrg.category || 'Parish Association'} • ಸಂಘಟನಾಂ`
-              : 'ಸಂಘಟನಾಂ • Associations & Ministries'}
-          </span>
           <div className="org-bilingual-title">
             {selectedOrg && selectedOrg.konkaniName && (
               <span className="org-bilingual-title__konkani">{selectedOrg.konkaniName}</span>

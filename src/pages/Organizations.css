@@ -1,3 +1,256 @@
+/* ==========================================================================
+   Minimal Thodambila Organizations Directory Layout
+   ========================================================================== */
+
+.org-hub-minimal-wrapper {
+  max-width: 920px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.org-hub-minimal-header {
+  text-align: center;
+  padding: 1.5rem 1rem 0;
+}
+
+.org-hub-minimal-konkani-title {
+  font-family: var(--font-serif);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--brown-primary);
+  margin: 0 0 0.4rem;
+  letter-spacing: 0.02em;
+}
+
+.org-hub-minimal-subtitle {
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin: 0 0 1rem;
+}
+
+.org-hub-minimal-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: var(--warm-white);
+  border: 1px solid var(--border-gold);
+  padding: 0.45rem 1.25rem;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--brown-primary);
+}
+
+.org-hub-search-box {
+  position: relative;
+  max-width: 440px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.org-hub-search-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.org-hub-search-input {
+  width: 100%;
+  padding: 0.65rem 2.5rem 0.65rem 2.5rem;
+  background: var(--warm-white);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-full);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  color: var(--text-dark);
+  outline: none;
+  transition: all var(--transition-fast);
+}
+
+.org-hub-search-input:focus {
+  border-color: var(--gold-antique);
+  box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.15);
+  background: #fff;
+}
+
+.org-hub-categories {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.org-category-pill {
+  padding: 0.4rem 1.1rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-gold);
+  background: var(--warm-white);
+  color: var(--brown-primary);
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.org-category-pill:hover {
+  background: var(--cream);
+  border-color: var(--gold-antique);
+}
+
+.org-category-pill--active {
+  background: var(--brown-primary) !important;
+  color: #ffffff !important;
+  border-color: var(--brown-primary) !important;
+  box-shadow: 0 4px 12px rgba(60, 24, 16, 0.2);
+}
+
+.org-hub-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.35rem;
+}
+
+.org-hub-card {
+  background: var(--warm-white);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-md);
+  padding: 1.35rem 1.35rem 1.15rem;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  box-shadow: var(--shadow-soft);
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.org-hub-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold-antique), #d3413f, var(--gold-antique));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.org-hub-card:hover::before {
+  opacity: 1;
+}
+
+.org-hub-card:hover {
+  border-color: var(--gold-antique);
+  background: #ffffff;
+  box-shadow: 0 12px 28px rgba(60, 24, 16, 0.1), 0 2px 8px rgba(184, 134, 11, 0.15);
+}
+
+.org-hub-card__top {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding-bottom: 0.65rem;
+  border-bottom: 1px dashed var(--border-beige);
+}
+
+.org-hub-card__konkani {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--brown-primary);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.org-hub-card__english {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--gold-antique);
+}
+
+.org-hub-card__info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  flex: 1;
+}
+
+.org-hub-card__desc {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+  margin: 0 0 0.2rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.org-hub-card__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+}
+
+.org-hub-card__label {
+  color: var(--text-muted);
+}
+
+.org-hub-card__val {
+  font-weight: 600;
+  color: var(--brown-primary);
+}
+
+.org-hub-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.65rem;
+  border-top: 1px solid var(--border-beige);
+  font-size: 0.78rem;
+}
+
+.org-hub-card__badge {
+  background: var(--cream);
+  border: 1px solid var(--border-gold);
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-full);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--brown-primary);
+}
+
+.org-hub-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: var(--gold-antique);
+  font-weight: 700;
+  transition: gap var(--transition-fast);
+}
+
+.org-hub-card:hover .org-hub-card__link {
+  gap: 0.5rem;
+  color: var(--brown-primary);
+}
+
+.org-hub-card:hover .org-hub-card__link svg {
+  transform: translateX(4px);
+  transition: transform 0.25s ease;
+}
+
 /* ========================================================
    ORGANIZATIONS & ASSOCIATIONS STYLING
    Our Lady of Loretto Church
@@ -326,6 +579,252 @@
 .org-empty__desc {
   color: var(--text-muted);
   margin-bottom: 1.5rem;
+}
+
+/* ── Minimal Detail Layout (Thodambila Style) ── */
+.org-minimal-wrapper {
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.org-minimal-header {
+  text-align: center;
+  padding: 1.5rem 1rem 0.5rem;
+}
+
+.org-minimal-title-konkani {
+  font-family: var(--font-serif);
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--brown-primary);
+  margin: 0 0 0.35rem;
+  letter-spacing: 0.02em;
+}
+
+.org-minimal-title-english {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: var(--gold-antique);
+  margin: 0 0 1rem;
+}
+
+.org-minimal-meta-strip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  background: var(--warm-white);
+  border: 1px solid var(--border-gold);
+  padding: 0.5rem 1.25rem;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.org-minimal-meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-weight: 600;
+  color: var(--brown-primary);
+}
+
+.org-minimal-meta-icon {
+  color: var(--gold-antique);
+}
+
+.org-minimal-meta-sep {
+  color: var(--gold-light);
+  font-size: 0.9rem;
+}
+
+.org-minimal-motto {
+  font-style: italic;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin: 1rem auto 0;
+  max-width: 600px;
+}
+
+.org-minimal-section {
+  background: var(--warm-white);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-md);
+  padding: 2rem 2rem 1.75rem;
+  box-shadow: var(--shadow-soft);
+}
+
+.org-minimal-section-title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--brown-primary);
+  margin: 0 0 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.org-minimal-section-title svg {
+  color: var(--gold-antique);
+}
+
+.org-minimal-bearers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.25rem;
+}
+
+.org-minimal-bearer-card {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 0.5rem;
+  background: var(--cream);
+  border: 1px solid var(--border-beige);
+  border-radius: var(--radius-sm);
+}
+
+.org-minimal-avatar {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 3px solid var(--gold-antique);
+  overflow: hidden;
+  margin-bottom: 0.85rem;
+  background: var(--cream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.org-minimal-avatar__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.org-minimal-bearer-konkani-name {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--brown-primary);
+  margin: 0 0 0.15rem;
+  line-height: 1.25;
+}
+
+.org-minimal-bearer-eng-name {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin: 0 0 0.5rem;
+}
+
+.org-minimal-role-badge {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--gold-antique);
+  margin-bottom: 0.4rem;
+  letter-spacing: 0.03em;
+}
+
+.org-minimal-role-badge--director {
+  color: #b82c2a;
+}
+
+.org-minimal-phone-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  color: var(--brown-primary);
+  background: var(--warm-white);
+  border: 1px solid var(--border-gold);
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  font-weight: 600;
+  transition: all var(--transition-fast);
+}
+
+.org-minimal-phone-btn:hover {
+  background: var(--gold-antique);
+  color: #fff;
+  border-color: var(--gold-antique);
+}
+
+.org-minimal-card-section {
+  background: var(--warm-white);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-md);
+  padding: 1.75rem 2rem;
+  box-shadow: var(--shadow-soft);
+}
+
+.org-minimal-about-text {
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--text-body);
+  margin: 0;
+}
+
+.org-minimal-bottom-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1.25rem;
+  border-top: 1px dashed var(--border-gold);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.org-minimal-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--brown-primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.org-minimal-back-link:hover {
+  color: var(--gold-antique);
+}
+
+.org-minimal-prev-next {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.org-minimal-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.85rem;
+  background: var(--warm-white);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--brown-primary);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.org-minimal-nav-btn:hover {
+  background: var(--gold-antique);
+  color: #fff;
+  border-color: var(--gold-antique);
 }
 
 /* ========================================================

@@ -16,9 +16,6 @@ const OurPatronessSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
           >
-            <span className="section-heading__label" style={{ color: 'var(--gold-light)' }}>
-              Patroness of Our Parish
-            </span>
             <h2 className="patroness__title">Our Lady of Loretto</h2>
             
             <blockquote className="patroness__quote">

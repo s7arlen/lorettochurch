@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Play, ArrowRight, Video } from 'lucide-react';
@@ -12,7 +12,6 @@ const VideoSection = () => {
     <section className="parish-videos section section--white" aria-label="Parish Videos">
       <div className="container">
         <div className="section-heading">
-          <span className="section-heading__label">Media & Devotion</span>
           <h2 className="section-heading__title">From Our Parish</h2>
           <p className="section-heading__subtitle">
             Watch liturgical celebrations, feast day recordings and parish media

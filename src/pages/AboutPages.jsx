@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Landmark, Shield } from 'lucide-react';
@@ -8,7 +8,6 @@ export const OurParishPage = () => (
   <main className="inner-page">
     <section className="page-hero">
       <div className="page-hero__content container">
-        <span className="page-hero__label">Diocese of Mangalore</span>
         <h1 className="page-hero__title">Our Parish</h1>
         <div className="page-hero__breadcrumb">
           <Link to="/">Home</Link> <span>/</span> <span>About</span> <span>/</span> <span>Our Parish</span>
@@ -60,7 +59,6 @@ export const HistoryPage = () => (
   <main className="inner-page">
     <section className="page-hero">
       <div className="page-hero__content container">
-        <span className="page-hero__label">Heritage & Milestones</span>
         <h1 className="page-hero__title">Church History</h1>
         <div className="page-hero__breadcrumb">
           <Link to="/">Home</Link> <span>/</span> <span>About</span> <span>/</span> <span>History</span>
@@ -71,7 +69,6 @@ export const HistoryPage = () => (
     <section className="section section--cream">
       <div className="container">
         <div className="section-heading">
-          <span className="section-heading__label">Timeline of Faith</span>
           <h2 className="section-heading__title">Historical Milestones</h2>
           <p className="section-heading__subtitle">Journey through the rich foundation and growth of Our Lady of Loretto Parish</p>
         </div>
@@ -126,7 +123,6 @@ export const PatronessPage = () => (
   <main className="inner-page">
     <section className="page-hero">
       <div className="page-hero__content container">
-        <span className="page-hero__label">Holy Patroness</span>
         <h1 className="page-hero__title">Our Lady of Loretto</h1>
         <div className="page-hero__breadcrumb">
           <Link to="/">Home</Link> <span>/</span> <span>About</span> <span>/</span> <span>Our Patroness</span>
@@ -212,7 +208,6 @@ export const DiocesePage = () => (
   <main className="inner-page">
     <section className="page-hero">
       <div className="page-hero__content container">
-        <span className="page-hero__label">Diocesan Identity</span>
         <h1 className="page-hero__title">Diocese of Mangalore</h1>
         <div className="page-hero__breadcrumb">
           <Link to="/">Home</Link> <span>/</span> <span>About</span> <span>/</span> <span>Diocese</span>

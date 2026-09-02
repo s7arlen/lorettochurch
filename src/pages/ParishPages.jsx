@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Link } from 'react-router-dom';
 import { leadership } from '../data/leadership';
 import { wards } from '../data/wards';
@@ -9,7 +9,6 @@ export const ParishPriestPage = () => {
     <main className="inner-page">
       <section className="page-hero">
         <div className="page-hero__content container">
-          <span className="page-hero__label">Parish Leadership</span>
           <h1 className="page-hero__title">Parish Priest</h1>
           <div className="page-hero__breadcrumb">
             <Link to="/">Home</Link> <span>/</span> <span>Parish</span> <span>/</span> <span>Parish Priest</span>
@@ -47,7 +46,6 @@ export const PastoralTeamPage = () => (
   <main className="inner-page">
     <section className="page-hero">
       <div className="page-hero__content container">
-        <span className="page-hero__label">Clergy & Leadership</span>
         <h1 className="page-hero__title">Pastoral Team</h1>
         <div className="page-hero__breadcrumb">
           <Link to="/">Home</Link> <span>/</span> <span>Parish</span> <span>/</span> <span>Pastoral Team</span>
@@ -76,7 +74,6 @@ export const ParishCouncilPage = () => (
   <main className="inner-page">
     <section className="page-hero">
       <div className="page-hero__content container">
-        <span className="page-hero__label">Parish Governance</span>
         <h1 className="page-hero__title">Parish Council</h1>
         <div className="page-hero__breadcrumb">
           <Link to="/">Home</Link> <span>/</span> <span>Parish</span> <span>/</span> <span>Parish Council</span>
@@ -87,7 +84,6 @@ export const ParishCouncilPage = () => (
     <section className="section section--white">
       <div className="container">
         <div className="section-heading">
-          <span className="section-heading__label">Council Executive & Members</span>
           <h2 className="section-heading__title">Parish Pastoral Council</h2>
           <p className="section-heading__subtitle">Collaborating in the administration and pastoral growth of the parish</p>
         </div>
@@ -113,7 +109,6 @@ export const ParishOfficePage = () => (
   <main className="inner-page">
     <section className="page-hero">
       <div className="page-hero__content container">
-        <span className="page-hero__label">Administration & Services</span>
         <h1 className="page-hero__title">Parish Office</h1>
         <div className="page-hero__breadcrumb">
           <Link to="/">Home</Link> <span>/</span> <span>Parish</span> <span>/</span> <span>Parish Office</span>

@@ -1,5 +1,6 @@
-import React, { useState, useMemo } from 'react';
+﻿import React, { useState, useMemo } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   Search,
   X,
@@ -17,6 +18,28 @@ import {
 } from 'lucide-react';
 import { wards } from '../data/wards';
 import './Wards.css';
+
+// Animation variants for smooth stagger & card transitions
+const containerVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.05,
+      delayChildren: 0.05,
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 24, scale: 0.96 },
+  show: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
+  },
+};
 
 // Subcomponent: Leader Avatar with initials fallback
 const LeaderAvatar = ({ photo, name, role }) => {
@@ -84,7 +107,12 @@ const WardDetail = ({ ward }) => {
   return (
     <div className="ward-minimal-wrapper">
       {/* 1. Clean Title Header */}
-      <div className="ward-minimal-header">
+      <motion.div
+        className="ward-minimal-header"
+        initial={{ opacity: 0, y: -15 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
         <h1 className="ward-minimal-title-konkani">{ward.konkaniName}</h1>
         <h2 className="ward-minimal-title-english">{ward.name}</h2>
 
@@ -108,14 +136,29 @@ const WardDetail = ({ ward }) => {
         {ward.motto && (
           <p className="ward-minimal-motto">"{ward.motto}"</p>
         )}
-      </div>
+      </motion.div>
 
       {/* 2. Office Bearers / Leadership Grid (ಹುದ್ದೆದಾರ್ - 3 Clean Cards) */}
-      <div className="ward-minimal-section">
-        <div className="ward-minimal-bearers-grid">
+      <motion.div
+        className="ward-minimal-section"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.1 }}
+      >
+        <motion.div
+          className="ward-minimal-bearers-grid"
+          variants={containerVariants}
+          initial="hidden"
+          animate="show"
+        >
           {/* Gurkar */}
           {ward.gurkar && (
-            <div className="ward-minimal-bearer-card">
+            <motion.div
+              className="ward-minimal-bearer-card"
+              variants={cardVariants}
+              whileHover={{ y: -5, scale: 1.02 }}
+              transition={{ duration: 0.25 }}
+            >
               <div className="ward-minimal-avatar">
                 <LeaderAvatar
                   photo={ward.gurkar.photo}
@@ -141,12 +184,18 @@ const WardDetail = ({ ward }) => {
                   <span>{ward.gurkar.phone}</span>
                 </a>
               )}
-            </div>
+            </motion.div>
           )}
 
           {/* Representatives */}
           {ward.representatives?.map((rep, idx) => (
-            <div key={idx} className="ward-minimal-bearer-card">
+            <motion.div
+              key={idx}
+              className="ward-minimal-bearer-card"
+              variants={cardVariants}
+              whileHover={{ y: -5, scale: 1.02 }}
+              transition={{ duration: 0.25 }}
+            >
               <div className="ward-minimal-avatar">
                 <LeaderAvatar photo={rep.photo} name={rep.name} role={rep.role} />
               </div>
@@ -168,11 +217,11 @@ const WardDetail = ({ ward }) => {
                   <span>{rep.phone}</span>
                 </a>
               )}
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
-        {/* 3. The Red Banner Button: Click here for Family Photos (Thodambila Reference) */}
+        {/* 3. The Red Banner Button: Click here for Family Photos */}
         <button
           type="button"
           className={`ward-family-photos-banner-btn ${showFamilies ? 'ward-family-photos-banner-btn--open' : ''}`}
@@ -183,90 +232,117 @@ const WardDetail = ({ ward }) => {
           <span>Click here for Family Photos</span>
           {showFamilies ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
         </button>
-      </div>
+      </motion.div>
 
       {/* 4. Family Photos & Directory (Collapsible / Toggled by Red Button) */}
-      {showFamilies && (
-        <div id="ward-families-section" className="ward-minimal-families-container">
-          <div className="ward-minimal-families-header">
-            <div>
-              <h3 className="ward-minimal-families-title">
-                ವಾಡ್ಯಾಚ್ಯಾ ಕುಟ್ಮಾಂಚಿ ತಸ್ವಿರ್
-              </h3>
-              <span className="ward-minimal-families-count">
-                ಒಟ್ಟು ಕುಟ್ಮಾಂ (Total Families) : {filteredFamilies.length}
-              </span>
+      <AnimatePresence>
+        {showFamilies && (
+          <motion.div
+            id="ward-families-section"
+            className="ward-minimal-families-container"
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 15 }}
+            transition={{ duration: 0.35, ease: 'easeOut' }}
+          >
+            <div className="ward-minimal-families-header">
+              <div>
+                <h3 className="ward-minimal-families-title">
+                  ವಾಡ್ಯಾಚ್ಯಾ ಕುಟ್ಮಾಂಚಿ ತಸ್ವಿರ್
+                </h3>
+                <span className="ward-minimal-families-count">
+                  ಒಟ್ಟು ಕುಟ್ಮಾಂ (Total Families) : {filteredFamilies.length}
+                </span>
+              </div>
+
+              {/* Family Search */}
+              <div className="ward-minimal-family-search">
+                <Search size={15} className="org-search__icon" />
+                <input
+                  type="text"
+                  className="ward-minimal-family-search__input"
+                  placeholder="Search family name or house..."
+                  value={familySearch}
+                  onChange={(e) => setFamilySearch(e.target.value)}
+                  aria-label="Search families"
+                />
+                {familySearch && (
+                  <button
+                    className="ward-search__clear"
+                    onClick={() => setFamilySearch('')}
+                    aria-label="Clear search"
+                  >
+                    <X size={14} />
+                  </button>
+                )}
+              </div>
             </div>
 
-            {/* Family Search */}
-            <div className="ward-minimal-family-search">
-              <Search size={15} className="org-search__icon" />
-              <input
-                type="text"
-                className="ward-minimal-family-search__input"
-                placeholder="Search family name or house..."
-                value={familySearch}
-                onChange={(e) => setFamilySearch(e.target.value)}
-                aria-label="Search families"
-              />
-              {familySearch && (
-                <button
-                  className="ward-search__clear"
-                  onClick={() => setFamilySearch('')}
-                  aria-label="Clear search"
-                >
-                  <X size={14} />
-                </button>
-              )}
-            </div>
-          </div>
+            {/* Clean Family Cards Grid */}
+            {filteredFamilies.length > 0 ? (
+              <motion.div
+                className="ward-minimal-families-grid"
+                variants={containerVariants}
+                initial="hidden"
+                animate="show"
+                key={familySearch}
+              >
+                {filteredFamilies.map((family, idx) => (
+                  <motion.div
+                    key={family.id || idx}
+                    variants={cardVariants}
+                    whileHover={{ y: -4, scale: 1.02 }}
+                    transition={{ duration: 0.2 }}
+                    className="ward-minimal-family-card"
+                  >
+                    {/* Photo Frame Placeholder */}
+                    <div className="ward-minimal-family-photo-box">
+                      <div className="ward-minimal-family-icon">👨‍👩‍👧‍👦</div>
+                      <span className="ward-minimal-family-photo-label">ಕುಟ್ಮಾಚಿ ತಸ್ವಿರ್</span>
+                    </div>
 
-          {/* Clean Family Cards Grid */}
-          {filteredFamilies.length > 0 ? (
-            <div className="ward-minimal-families-grid">
-              {filteredFamilies.map((family, idx) => (
-                <div key={family.id || idx} className="ward-minimal-family-card">
-                  {/* Photo Frame Placeholder */}
-                  <div className="ward-minimal-family-photo-box">
-                    <div className="ward-minimal-family-icon">👨‍👩‍👧‍👦</div>
-                    <span className="ward-minimal-family-photo-label">ಕುಟ್ಮಾಚಿ ತಸ್ವಿರ್</span>
-                  </div>
+                    <div className="ward-minimal-family-info">
+                      <span className="ward-minimal-family-num">#{idx + 1}</span>
+                      <h4 className="ward-minimal-family-konkani-name">
+                        {family.konkaniHead || `${family.head} ಆನಿ ಕುಟಾಮ್`}
+                      </h4>
+                      <p className="ward-minimal-family-eng-name">{family.head}</p>
 
-                  <div className="ward-minimal-family-info">
-                    <span className="ward-minimal-family-num">#{idx + 1}</span>
-                    <h4 className="ward-minimal-family-konkani-name">
-                      {family.konkaniHead || `${family.head} ಆನಿ ಕುಟಾಮ್`}
-                    </h4>
-                    <p className="ward-minimal-family-eng-name">{family.head}</p>
+                      {family.houseName && (
+                        <span className="ward-minimal-family-house">
+                          🏠 {family.houseName}
+                        </span>
+                      )}
 
-                    {family.houseName && (
-                      <span className="ward-minimal-family-house">
-                        🏠 {family.houseName}
-                      </span>
-                    )}
-
-                    {family.address && (
-                      <span className="ward-minimal-family-addr">
-                        📍 {family.address}
-                      </span>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="ward-empty" style={{ padding: '2rem 1rem' }}>
-              <ShieldAlert size={32} className="ward-empty__icon" />
-              <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>
-                No families matching "{familySearch}".
-              </p>
-            </div>
-          )}
-        </div>
-      )}
+                      {family.address && (
+                        <span className="ward-minimal-family-addr">
+                          📍 {family.address}
+                        </span>
+                      )}
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            ) : (
+              <div className="ward-empty" style={{ padding: '2rem 1rem' }}>
+                <ShieldAlert size={32} className="ward-empty__icon" />
+                <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>
+                  No families matching "{familySearch}".
+                </p>
+              </div>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* 5. Ward Feast & Overview Section (Minimal) */}
-      <div className="ward-minimal-feast-card">
+      <motion.div
+        className="ward-minimal-feast-card"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.45, delay: 0.15 }}
+      >
         <div className="ward-minimal-feast-header">
           <Sparkles size={20} className="ward-minimal-feast-icon" />
           <h3 className="ward-minimal-feast-title">
@@ -289,11 +365,11 @@ const WardDetail = ({ ward }) => {
             <span className="ward-minimal-detail-value">{ward.area}</span>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* 6. Clean Bottom Navigation */}
       <div className="ward-minimal-bottom-nav">
-        <Link to="/parish/wards" className="ward-minimal-back-link">
+        <Link to="/wards" className="ward-minimal-back-link">
           <ArrowLeft size={16} />
           <span>Back to All Wards (ವಾಡೆ)</span>
         </Link>
@@ -301,7 +377,7 @@ const WardDetail = ({ ward }) => {
         <div className="ward-minimal-prev-next">
           {prevWard && (
             <Link
-              to={`/parish/wards/${prevWard.slug}`}
+              to={`/wards/${prevWard.slug}`}
               className="ward-minimal-nav-btn"
               title={prevWard.name}
             >
@@ -311,7 +387,7 @@ const WardDetail = ({ ward }) => {
           )}
           {nextWard && (
             <Link
-              to={`/parish/wards/${nextWard.slug}`}
+              to={`/wards/${nextWard.slug}`}
               className="ward-minimal-nav-btn"
               title={nextWard.name}
             >
@@ -359,21 +435,36 @@ const WardsList = () => {
   return (
     <div className="ward-hub-minimal-wrapper">
       {/* 1. Clean Centered Header */}
-      <div className="ward-hub-minimal-header">
+      <motion.div
+        className="ward-hub-minimal-header"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: 'easeOut' }}
+      >
         <h1 className="ward-hub-minimal-konkani-title">ವಾಡೆ</h1>
         <p className="ward-hub-minimal-subtitle">
           Small Christian Communities (SCC) • Our Lady of Loretto Church
         </p>
 
-        <div className="ward-hub-minimal-pill">
+        <motion.div
+          className="ward-hub-minimal-pill"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.4, delay: 0.15 }}
+        >
           <span>{wards.length} Wards (ವಾಡೆ)</span>
           <span>•</span>
           <span>{totalHouseholds}+ Catholic Families (ಕುಟ್ಮಾಂ)</span>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       {/* 2. Simple Centered Search */}
-      <div className="ward-hub-search-box">
+      <motion.div
+        className="ward-hub-search-box"
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: 0.2 }}
+      >
         <Search size={16} className="ward-hub-search-icon" />
         <input
           type="text"
@@ -392,51 +483,69 @@ const WardsList = () => {
             <X size={15} />
           </button>
         )}
-      </div>
+      </motion.div>
 
-      {/* 3. Minimal Ward Cards Grid */}
+      {/* 3. Minimal Ward Cards Grid with Staggered Entrance */}
       {filteredWards.length > 0 ? (
-        <div className="ward-hub-grid">
+        <motion.div
+          className="ward-hub-grid"
+          variants={containerVariants}
+          initial="hidden"
+          animate="show"
+          key={searchQuery}
+        >
           {filteredWards.map((ward) => (
-            <Link
+            <motion.div
               key={ward.id}
-              to={`/parish/wards/${ward.slug}`}
-              className="ward-hub-card"
-              aria-label={`View details for ${ward.name}`}
+              variants={cardVariants}
+              whileHover={{ y: -6, scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ duration: 0.25, ease: 'easeOut' }}
             >
-              <div className="ward-hub-card__top">
-                <h3 className="ward-hub-card__konkani">{ward.konkaniName}</h3>
-                <span className="ward-hub-card__english">{ward.name}</span>
-              </div>
-
-              <div className="ward-hub-card__info">
-                <div className="ward-hub-card__row">
-                  <span className="ward-hub-card__label">ಆಶೀರ್ವಾದಕ್ (Patron):</span>
-                  <span className="ward-hub-card__val">{ward.patronSaint}</span>
+              <Link
+                to={`/wards/${ward.slug}`}
+                className="ward-hub-card"
+                aria-label={`View details for ${ward.name}`}
+              >
+                <div className="ward-hub-card__top">
+                  <h3 className="ward-hub-card__konkani">{ward.konkaniName}</h3>
+                  <span className="ward-hub-card__english">{ward.name}</span>
                 </div>
 
-                {ward.gurkar && (
+                <div className="ward-hub-card__info">
                   <div className="ward-hub-card__row">
-                    <span className="ward-hub-card__label">ಗುರ್ಕಾರ್ (Gurkar):</span>
-                    <span className="ward-hub-card__val">{ward.gurkar.konkaniName || ward.gurkar.name}</span>
+                    <span className="ward-hub-card__label">ಆಶೀರ್ವಾದಕ್ (Patron):</span>
+                    <span className="ward-hub-card__val">{ward.patronSaint}</span>
                   </div>
-                )}
-              </div>
 
-              <div className="ward-hub-card__footer">
-                <span className="ward-hub-card__badge">
-                  {ward.householdsCount} ಕುಟ್ಮಾಂ (Families)
-                </span>
-                <span className="ward-hub-card__link">
-                  <span>View Details</span>
-                  <ArrowRight size={13} />
-                </span>
-              </div>
-            </Link>
+                  {ward.gurkar && (
+                    <div className="ward-hub-card__row">
+                      <span className="ward-hub-card__label">ಗುರ್ಕಾರ್ (Gurkar):</span>
+                      <span className="ward-hub-card__val">{ward.gurkar.konkaniName || ward.gurkar.name}</span>
+                    </div>
+                  )}
+                </div>
+
+                <div className="ward-hub-card__footer">
+                  <span className="ward-hub-card__badge">
+                    {ward.householdsCount} ಕುಟ್ಮಾಂ (Families)
+                  </span>
+                  <span className="ward-hub-card__link">
+                    <span>View Details</span>
+                    <ArrowRight size={13} />
+                  </span>
+                </div>
+              </Link>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       ) : (
-        <div className="ward-empty" style={{ padding: '2.5rem 1rem' }}>
+        <motion.div
+          className="ward-empty"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          style={{ padding: '2.5rem 1rem' }}
+        >
           <ShieldAlert size={36} className="ward-empty__icon" />
           <h4 style={{ fontFamily: 'var(--font-serif)', color: 'var(--brown-primary)' }}>
             No Wards Found
@@ -447,7 +556,7 @@ const WardsList = () => {
           <button className="btn btn--outline" onClick={() => setSearchQuery('')}>
             Reset Search
           </button>
-        </div>
+        </motion.div>
       )}
     </div>
   );
@@ -463,11 +572,6 @@ const WardsPage = () => {
       {/* Dynamic Page Hero */}
       <section className="page-hero">
         <div className="page-hero__content container">
-          <span className="page-hero__label">
-            {selectedWard
-              ? `${selectedWard.patronSaint} • ವಾಡೆ`
-              : 'ವಾಡೆ • Small Christian Communities (SCC)'}
-          </span>
           <div className="ward-bilingual-title">
             {selectedWard && selectedWard.konkaniName && (
               <span className="ward-bilingual-title__konkani">{selectedWard.konkaniName}</span>
@@ -478,10 +582,9 @@ const WardsPage = () => {
           </div>
           <div className="page-hero__breadcrumb">
             <Link to="/">Home</Link> <span>/</span>{' '}
-            <Link to="/parish">Parish</Link> <span>/</span>{' '}
             {selectedWard ? (
               <>
-                <Link to="/parish/wards">Wards</Link> <span>/</span>{' '}
+                <Link to="/wards">Wards</Link> <span>/</span>{' '}
                 <span>{selectedWard.name}</span>
               </>
             ) : (
@@ -504,7 +607,7 @@ const WardsPage = () => {
                 <p className="ward-empty__desc">
                   The parish ward you are looking for does not exist or may have been renamed.
                 </p>
-                <Link to="/parish/wards" className="btn btn--primary">
+                <Link to="/wards" className="btn btn--primary">
                   ← Back to All Wards
                 </Link>
               </div>

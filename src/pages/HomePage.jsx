@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Calendar, MapPin, Clock, ArrowRight } from 'lucide-react';
@@ -110,7 +110,6 @@ const HomePage = () => {
             {/* Left: Upcoming Events */}
             <div className="home-updates__col">
               <div className="home-updates__col-heading">
-                <span className="section-heading__label">Calendar of Faith</span>
                 <h2>Upcoming Events</h2>
               </div>
 
@@ -130,7 +129,6 @@ const HomePage = () => {
             {/* Right: Latest News */}
             <div className="home-updates__col">
               <div className="home-updates__col-heading">
-                <span className="section-heading__label">Announcements & Updates</span>
                 <h2>Latest News</h2>
               </div>
 

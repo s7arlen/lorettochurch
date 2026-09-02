@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight, Landmark, MapPin, Church, Compass } from 'lucide-react';
@@ -9,7 +9,6 @@ const ParishHistorySection = () => {
     <section className="parish-history section section--cream" aria-label="Our Parish and History">
       <div className="container">
         <div className="section-heading">
-          <span className="section-heading__label">Heritage & Tradition</span>
           <h2 className="section-heading__title">Our Parish & History</h2>
           <p className="section-heading__subtitle">
             A sanctuary of Catholic faith in Loretto, Diocese of Mangalore

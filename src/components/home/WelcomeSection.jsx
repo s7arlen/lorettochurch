@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight, Shield } from 'lucide-react';
@@ -17,7 +17,6 @@ const WelcomeSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
           >
-            <span className="section-heading__label">Peace & Goodness</span>
             <h2 className="welcome__title">Our Parish, Our Community</h2>
             <div className="welcome__gold-divider" aria-hidden="true" />
             

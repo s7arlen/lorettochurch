@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Users, HeartHandshake, Music, Shield, BookOpen, UsersRound, Trophy, HandHeart, ArrowRight } from 'lucide-react';
@@ -23,7 +23,6 @@ const ParishOrganizationsSection = () => {
     <section className="organizations section section--cream" aria-label="Community Ministries and Organizations">
       <div className="container">
         <div className="section-heading">
-          <span className="section-heading__label">Parish Life</span>
           <h2 className="section-heading__title">Associations</h2>
           <p className="section-heading__subtitle">
             Groups that bring our parish family together in faith and service

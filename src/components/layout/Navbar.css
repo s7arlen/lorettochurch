@@ -328,21 +328,33 @@
   /* Floating Glass Dropdowns */
   .navbar__dropdown {
     position: absolute;
-    top: calc(100% + 8px);
+    top: calc(100% + 6px);
     left: 50%;
     transform: translateX(-50%) translateY(8px);
     min-width: 210px;
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
     z-index: 1100;
   }
 
+  /* Invisible bridge to bridge hover gap between menu link and dropdown */
+  .navbar__dropdown::before {
+    content: '';
+    position: absolute;
+    top: -14px;
+    left: -20px;
+    right: -20px;
+    height: 16px;
+    background: transparent;
+  }
+
+  .navbar__item:hover .navbar__dropdown,
   .navbar__dropdown--open {
     opacity: 1;
     visibility: visible;
-    pointer-events: all;
+    pointer-events: auto;
     transform: translateX(-50%) translateY(0);
   }
 

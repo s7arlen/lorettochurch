@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Link } from 'react-router-dom';
 import { sacraments } from '../data/sacraments';
 import MassScheduleSection from '../components/home/MassScheduleSection';
@@ -7,7 +7,6 @@ export const MassTimingsPage = () => (
   <main className="inner-page">
     <section className="page-hero">
       <div className="page-hero__content container">
-        <span className="page-hero__label">Liturgical Timings</span>
         <h1 className="page-hero__title">Mass Timings & Schedule</h1>
         <div className="page-hero__breadcrumb">
           <Link to="/">Home</Link> <span>/</span> <span>Faith</span> <span>/</span> <span>Mass Timings</span>
@@ -22,7 +21,6 @@ export const SacramentsPage = () => (
   <main className="inner-page">
     <section className="page-hero">
       <div className="page-hero__content container">
-        <span className="page-hero__label">Holy Sacraments</span>
         <h1 className="page-hero__title">The Sacraments</h1>
         <div className="page-hero__breadcrumb">
           <Link to="/">Home</Link> <span>/</span> <span>Faith</span> <span>/</span> <span>Sacraments</span>
@@ -33,7 +31,6 @@ export const SacramentsPage = () => (
     <section className="section section--cream">
       <div className="container">
         <div className="section-heading">
-          <span className="section-heading__label">Sacramental Life</span>
           <h2 className="section-heading__title">Parish Sacramental Information</h2>
           <p className="section-heading__subtitle">Guidelines, requirements and procedures for celebrating the Seven Sacraments</p>
         </div>
@@ -68,7 +65,6 @@ export const CatechismPage = () => (
   <main className="inner-page">
     <section className="page-hero">
       <div className="page-hero__content container">
-        <span className="page-hero__label">Faith Formation</span>
         <h1 className="page-hero__title">Parish Catechism</h1>
         <div className="page-hero__breadcrumb">
           <Link to="/">Home</Link> <span>/</span> <span>Faith</span> <span>/</span> <span>Catechism</span>
@@ -100,7 +96,6 @@ export const PrayerPage = () => (
   <main className="inner-page">
     <section className="page-hero">
       <div className="page-hero__content container">
-        <span className="page-hero__label">Devotional Life</span>
         <h1 className="page-hero__title">Prayers & Devotions</h1>
         <div className="page-hero__breadcrumb">
           <Link to="/">Home</Link> <span>/</span> <span>Faith</span> <span>/</span> <span>Prayer</span>

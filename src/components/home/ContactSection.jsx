@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Send, CheckCircle, AlertCircle } from 'lucide-react';
 import './ContactSection.css';
@@ -39,7 +39,6 @@ const ContactSection = () => {
     <section className="contact-section section section--cream" aria-label="Contact Parish Office">
       <div className="container">
         <div className="section-heading">
-          <span className="section-heading__label">Get in Touch</span>
           <h2 className="section-heading__title">Contact Parish Office</h2>
           <p className="section-heading__subtitle">
             We welcome your inquiries, intentions, and feedback

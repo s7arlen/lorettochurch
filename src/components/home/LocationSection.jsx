@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { motion } from 'framer-motion';
 import { MapPin, Phone, Mail, Navigation, ExternalLink } from 'lucide-react';
 import './LocationSection.css';
@@ -8,7 +8,6 @@ const LocationSection = () => {
     <section className="location-section section section--white" aria-label="Our Location">
       <div className="container">
         <div className="section-heading">
-          <span className="section-heading__label">Find Us</span>
           <h2 className="section-heading__title">Our Location</h2>
           <p className="section-heading__subtitle">
             Visit Our Lady of Loretto Church in Loretto, Mangalore
