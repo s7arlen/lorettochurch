@@ -103,6 +103,20 @@ const HeroSlider = () => {
         ))}
       </Swiper>
 
+      {/* Mobile-only hero content — static message over the rotating imagery */}
+      <div className="hero__mobile-layer">
+        <h1 className="hero__m-title">Welcome to Loretto Church</h1>
+        <div className="hero__m-divider" aria-hidden="true" />
+        <p className="hero__m-support">
+          Faith <span className="hero__m-dot" aria-hidden="true">•</span> Family{' '}
+          <span className="hero__m-dot" aria-hidden="true">•</span> Fellowship
+        </p>
+        <Link to="/about/our-parish" className="hero__m-cta">
+          Explore Church
+          <ArrowRight size={17} aria-hidden="true" />
+        </Link>
+      </div>
+
       {/* Downward Scroll Indicator */}
       <button
         className="hero__scroll-indicator"
