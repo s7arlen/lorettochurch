@@ -1,8 +1,8 @@
-﻿import React from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay, EffectFade } from 'swiper/modules';
-import { ArrowRight, ChevronDown, Calendar } from 'lucide-react';
+import { ArrowRight, Calendar } from 'lucide-react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -49,13 +49,6 @@ const slides = [
 ];
 
 const HeroSlider = () => {
-  const scrollToNextSection = () => {
-    const quickAccessEl = document.getElementById('quick-access-section');
-    if (quickAccessEl) {
-      quickAccessEl.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
     <section className="hero" aria-label="Hero image carousel">
       <Swiper
@@ -116,16 +109,6 @@ const HeroSlider = () => {
           <ArrowRight size={17} aria-hidden="true" />
         </Link>
       </div>
-
-      {/* Downward Scroll Indicator */}
-      <button
-        className="hero__scroll-indicator"
-        onClick={scrollToNextSection}
-        aria-label="Scroll to Quick Actions section"
-      >
-        <span className="hero__scroll-text">EXPLORE</span>
-        <ChevronDown size={18} className="hero__scroll-arrow" />
-      </button>
     </section>
   );
 };
