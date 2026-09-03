@@ -18,10 +18,10 @@ export const leadership = {
     },
     {
       id: 2,
-      name: '[PLACEHOLDER — Associate Priest]',
+      name: 'Jason Vijay Monis',
       designation: 'Rev. Fr.',
       position: 'Assistant Parish Priest',
-      image: `${import.meta.env.BASE_URL}images/priest-portrait.jpg`,
+      image: `${import.meta.env.BASE_URL}images/fr-jason-vijay-monis.jpg`,
     },
   ],
   parishCouncil: [

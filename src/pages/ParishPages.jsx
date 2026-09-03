@@ -1,10 +1,12 @@
-﻿import React from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { leadership } from '../data/leadership';
 import { wards } from '../data/wards';
 
 export const ParishPriestPage = () => {
-  const { parishPriest } = leadership;
+  const { parishPriest, pastoralTeam } = leadership;
+  const assistantPriest = pastoralTeam.find((m) => m.position === 'Assistant Parish Priest');
+
   return (
     <main className="inner-page">
       <section className="page-hero">
@@ -16,6 +18,7 @@ export const ParishPriestPage = () => {
         </div>
       </section>
 
+      {/* Parish Priest */}
       <section className="section section--white">
         <div className="container" style={{ maxWidth: '850px' }}>
           <div style={{ display: 'grid', gridTemplateColumns: '220px 1fr', gap: '2.5rem', alignItems: 'flex-start' }}>
@@ -38,6 +41,36 @@ export const ParishPriestPage = () => {
           </div>
         </div>
       </section>
+
+      {/* Assistant Parish Priest */}
+      {assistantPriest && (
+        <section className="section section--cream">
+          <div className="container" style={{ maxWidth: '850px' }}>
+            <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', color: 'var(--brown-primary)', marginBottom: '2rem', paddingBottom: '0.75rem', borderBottom: '1px dashed var(--border-gold)' }}>
+              Assistant Parish Priest
+            </h2>
+            <div style={{ display: 'grid', gridTemplateColumns: '180px 1fr', gap: '2rem', alignItems: 'center', background: 'var(--warm-white)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-gold)', padding: '2rem', boxShadow: 'var(--shadow-soft)' }}>
+              <div style={{ textAlign: 'center' }}>
+                <img
+                  src={assistantPriest.image}
+                  alt={assistantPriest.name}
+                  style={{ width: '140px', height: '140px', borderRadius: '50%', objectFit: 'cover', border: '3px solid var(--gold-antique)', margin: '0 auto 0.75rem', boxShadow: 'var(--shadow-soft)' }}
+                />
+                <span style={{ fontSize: '0.72rem', fontWeight: 600, color: 'var(--gold-antique)', textTransform: 'uppercase', letterSpacing: '0.1em', display: 'block' }}>{assistantPriest.designation}</span>
+                <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', color: 'var(--brown-primary)', margin: '0.2rem 0 0' }}>{assistantPriest.name}</h3>
+              </div>
+              <div>
+                <p style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--gold-antique)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.5rem' }}>
+                  {assistantPriest.position}
+                </p>
+                <p style={{ fontSize: '0.95rem', lineHeight: '1.75', color: 'var(--text-body)' }}>
+                  Assisting in the pastoral care and spiritual guidance of Our Lady of Loretto Church, Loretto. Working alongside the Parish Priest in administering the sacraments, leading liturgical celebrations, and serving the parish community.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
     </main>
   );
 };
